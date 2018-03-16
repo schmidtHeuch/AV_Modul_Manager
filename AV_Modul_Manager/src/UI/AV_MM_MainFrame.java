@@ -13,7 +13,7 @@ import java.io.File;
  */
 public class AV_MM_MainFrame extends javax.swing.JFrame {
 
-    public String stringOfFiles; 
+    public String [] stringOfFiles; 
     /**
      * Creates new form AV_MM_MainFrame
      */
@@ -128,20 +128,36 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private String getStringOfFiles(String aPath) {
+    private String [] getArrayOfFiles(String aPath) {
         File f = new File(aPath);
-        //File[] fileArray = f.listFiles();
-        String [] stringArrayOfFiles = f.list(); 
-        String tempStringOfFiles = getFilesAsString(stringArrayOfFiles);
-        stringOfFiles = tempStringOfFiles;
-        return stringOfFiles;
+        int indexForNeeded = 0;
+//        File[] fileArray = f.listFiles();        
+        String [] tempArray_all = f.list();
+        String [] tempArray_allNeeded = new String [tempArray_all.length];
+        for (int currentIndex = 0; currentIndex < tempArray_all.length; currentIndex++)
+        {
+            if (tempArray_all[currentIndex].startsWith("kp"))
+                {   
+                    if (!(tempArray_all[currentIndex].contains("vk")))
+                    {
+        tempArray_allNeeded[indexForNeeded] = tempArray_all[currentIndex];
+        indexForNeeded = indexForNeeded +1;
+                }
+                    }
+        }        
+        String [] stringArrayOfFiles = new String [indexForNeeded];
+        stringArrayOfFiles = tempArray_allNeeded;
+//        String tempStringOfFiles = getFilesAsString(stringArrayOfFiles);
+//        stringOfFiles = stringArrayOfFiles;
+//        return stringOfFiles;
+        return stringArrayOfFiles;
     }
 /**
  *
  * @param anArrayOfStrings
  * @return
  */
-    private static String getFilesAsString(String anArrayOfStrings[]) {
+/*    private static String getFilesAsString(String anArrayOfStrings[]) {
         String stringOfFiles;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < anArrayOfStrings.length; i++) {
@@ -153,14 +169,14 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         stringOfFiles = sb.toString();
         return stringOfFiles;
         }
-
+*/
     private void btn_openModul_ConverterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openModul_ConverterActionPerformed
         // TODO add your handling code here:
         
         String pathWithGreenMaps = "U:\\Ablage\\kunst_mi\\excel\\materialwirtschaft - produktion\\arbeitsvorbereitung\\1stammdaten";    
         //FilesAppendedToString allFiles = new FilesAppendedToString(pathWithGreenMaps);
-        String allFiles;
-        allFiles = "kp1002.xlsx, kp1003 01.xlsx"; //getStringOfFiles(pathWithGreenMaps);
+        String [] allFiles;
+        allFiles = getArrayOfFiles(pathWithGreenMaps);
         //if (allFiles instanceof String) {
         //    System.out.println(allFiles);
     //}
