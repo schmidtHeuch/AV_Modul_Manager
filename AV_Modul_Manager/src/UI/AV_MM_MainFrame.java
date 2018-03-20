@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package UI;
-
-//import av_modul_manager.FilesAppendedToString;
+import java.util.*;
 import java.io.File;
+import javax.swing.JOptionPane;
 /**
  *
  * @author schmidtu
@@ -129,27 +129,30 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private String [] getArrayOfFiles(String aPath) {
+        int myCountOfFiles;
         File f = new File(aPath);
-        int indexForNeeded = 0;
-//        File[] fileArray = f.listFiles();        
-        String [] tempArray_all = f.list();
-        String [] tempArray_allNeeded = new String [tempArray_all.length];
-        for (int currentIndex = 0; currentIndex < tempArray_all.length; currentIndex++)
-        {
-            if (tempArray_all[currentIndex].startsWith("kp"))
-                {   
-                    if (!(tempArray_all[currentIndex].contains("vk")))
+        myCountOfFiles = f.list().length;
+        Vector <String> tempVector_allNeeded = new Vector <String> ();
+        for (int currentIndex = 0; currentIndex < 10; currentIndex++)
+        {   
+//            System.out.println(currentIndex);
+            if (f.list()[currentIndex].startsWith("kp"))
+            {   
+                if (!(f.list()[currentIndex].contains("vk")))
+                {
+                    if ((f.list()[currentIndex].endsWith(".xls")) || (f.list()[currentIndex].endsWith(".xlsx"))) 
                     {
-        tempArray_allNeeded[indexForNeeded] = tempArray_all[currentIndex];
-        indexForNeeded = indexForNeeded +1;
-                }
+                        tempVector_allNeeded.add(f.list()[currentIndex]);
                     }
+                }
+            }
         }        
-        String [] stringArrayOfFiles = new String [indexForNeeded];
-        stringArrayOfFiles = tempArray_allNeeded;
-//        String tempStringOfFiles = getFilesAsString(stringArrayOfFiles);
-//        stringOfFiles = stringArrayOfFiles;
-//        return stringOfFiles;
+        String [] stringArrayOfFiles = new String [tempVector_allNeeded.size()];        
+        for ( int index=0; index < (tempVector_allNeeded.size()); ++index)
+        {
+            stringArrayOfFiles[index] = tempVector_allNeeded.elementAt(index);
+        }
+        Arrays.sort(stringArrayOfFiles);
         return stringArrayOfFiles;
     }
 /**
