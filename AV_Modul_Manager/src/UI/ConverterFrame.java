@@ -5,9 +5,13 @@
  */
 
 package UI;
-import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.DefaultListModel;
+import java.io.File;
+import javax.swing.JOptionPane;
+import java.awt.Desktop;
+import java.io.IOException;
 
 /**
  *
@@ -15,17 +19,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class ConverterFrame extends javax.swing.JFrame {       
   
-    /** Creates new form ConverterFrame */
-    public ConverterFrame() {
-        initComponents();        
-   
-        list_sourceFiles.setModel(new javax.swing.AbstractListModel<String>() {        
+    /** Creates new form ConverterFrame
+     * @param anArrayWithFiles */
+    public ConverterFrame(String [] anArrayWithFiles) {
+        initComponents(); 
         
-        String[] strings = { /*fileChooser.getSelectedFile().getName()*/ };
-        public int getSize() { return strings.length; }
-        public String getElementAt(int i) { return strings[i]; }
-});
-        
+        list_sourceFiles.setModel(new DefaultListModel());
+        DefaultListModel listModel = (DefaultListModel)list_sourceFiles.getModel();
+        for (int currentIndex = 0; currentIndex < anArrayWithFiles.length; currentIndex++)
+        {            
+            listModel.add(currentIndex, anArrayWithFiles[currentIndex]);                
+        }
     }
 
     /** This method is called from within the constructor to
@@ -47,12 +51,13 @@ public class ConverterFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         list_sourceFiles = new javax.swing.JList<>();
         btn_close = new javax.swing.JButton();
+        btn_convertToPDF = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(20, 20, 0, 0));
 
         jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item1", "Item2" };
+            String[] strings = { "kp1002.xlsx", "kp1003 01.xlsx" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -76,6 +81,11 @@ public class ConverterFrame extends javax.swing.JFrame {
             }
         });
 
+        list_sourceFiles.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "kp1002.xlsx", "kp1003 01.xlsx" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
         list_sourceFiles.setToolTipText("");
         jScrollPane1.setViewportView(list_sourceFiles);
 
@@ -86,6 +96,13 @@ public class ConverterFrame extends javax.swing.JFrame {
             }
         });
 
+        btn_convertToPDF.setText("Ausgewählte Datei konvertieren");
+        btn_convertToPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_convertToPDFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -93,9 +110,14 @@ public class ConverterFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_close))
-                .addGap(35, 35, 35)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_close))
+                        .addGap(35, 35, 35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_convertToPDF)
+                        .addGap(128, 128, 128)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_openDestinationFolder)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -116,8 +138,13 @@ public class ConverterFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(btn_openDestinationFolder)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btn_openDestinationFolder))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(btn_convertToPDF)))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -163,7 +190,7 @@ public class ConverterFrame extends javax.swing.JFrame {
     private void btn_openSourceFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openSourceFolderActionPerformed
         // TODO add your handling code here:
          // JFileChooser-Objekt erstellen
-        JFileChooser fileChooser = new JFileChooser("U:\\Ablage\\kunst_mi\\excel\\materialwirtschaft - produktion\\arbeitsvorbereitung\\1stammdaten");
+        JFileChooser fileChooser = new JFileChooser();
         fileChooser.setMultiSelectionEnabled(true);
         fileChooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter filefilter = new FileNameExtensionFilter("Excel-Dateien","xls","xlsx");
@@ -171,28 +198,9 @@ public class ConverterFrame extends javax.swing.JFrame {
         
         // Dialog zum Oeffnen von Dateien anzeigen
         int resultOfDialog = fileChooser.showDialog(null,"Excel-Dateien öffnen");
-        if(resultOfDialog == JFileChooser.APPROVE_OPTION) {          
-        
-        File directory = fileChooser.getCurrentDirectory();
-        setSourcePath(directory.getName());
-//            File[] selectedFile = fileChooser.getSelectedFiles();            
-        
-       // String[] fileAsStringArray = file.list();
-  //     for (int y = 0; y < stringOfFiles.length; y++){
-        list_sourceFiles.setModel(new javax.swing.AbstractListModel<String>() {
+        if(resultOfDialog == JFileChooser.APPROVE_OPTION) {    
             
-        String[] strings = { "stringOfFiles[y]" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-});
- //      }
-//            listModel.setElementAt(interessen[1], WIDTH);
-//            list_sourceFiles.setModel(fileChooser.getSelectedFile().getName());
-
-//               if (list_sourceFiles.getSelectedIndex() <0) {
-//                   list_sourceFiles.getContens().addElement("neu");
-               
-//               }
+        //            
         }
 
     }//GEN-LAST:event_btn_openSourceFolderActionPerformed
@@ -201,12 +209,24 @@ public class ConverterFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    public void setSourcePath(String aPath){
-        File f = new File(aPath);
-        File[] fileArray = f.listFiles();
-        String [] stringOfFiles = f.list();        
-    }
-    /**
+    private void btn_convertToPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_convertToPDFActionPerformed
+        // TODO add your handling code here:
+        JOptionPane myDialog = new JOptionPane();
+        myDialog.showMessageDialog(null, list_sourceFiles.getSelectedValue());
+        try {
+            Desktop desktop = null;
+            if (desktop.isDesktopSupported()) 
+            {
+                desktop = Desktop.getDesktop();
+            }
+            desktop.open(new File("U:\\Ablage\\kunst_mi\\excel\\materialwirtschaft - produktion\\arbeitsvorbereitung\\1stammdaten" + list_sourceFiles.getSelectedValue()));
+            } catch (IOException ioe) 
+            {
+            ioe.printStackTrace();
+            }
+    }//GEN-LAST:event_btn_convertToPDFActionPerformed
+
+     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -234,15 +254,16 @@ public class ConverterFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ConverterFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            String [] temp = new String [1];
+            temp [0] = "eins";
+            new ConverterFrame(temp).setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_close;
+    private javax.swing.JButton btn_convertToPDF;
     private javax.swing.JButton btn_openDestinationFolder;
     private javax.swing.JButton btn_openSourceFolder;
     private javax.swing.JComboBox<String> jComboBox1;
