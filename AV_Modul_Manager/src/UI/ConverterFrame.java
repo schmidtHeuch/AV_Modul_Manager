@@ -21,14 +21,23 @@ public class ConverterFrame extends javax.swing.JFrame {
   
     /** Creates new form ConverterFrame
      * @param anArrayWithFiles */
-    public ConverterFrame(String [] anArrayWithFiles) {
+    public ConverterFrame(String [] anArraySourceFiles, String [] anArrayDestinationFiles) {
         initComponents(); 
         
         list_sourceFiles.setModel(new DefaultListModel());
-        DefaultListModel listModel = (DefaultListModel)list_sourceFiles.getModel();
-        for (int currentIndex = 0; currentIndex < anArrayWithFiles.length; currentIndex++)
+        DefaultListModel listModelSource = (DefaultListModel)list_sourceFiles.getModel();
+        for (int indexSource = 0; indexSource < anArraySourceFiles.length; indexSource++)
         {            
-            listModel.add(currentIndex, anArrayWithFiles[currentIndex]);                
+            listModelSource.add(indexSource, anArraySourceFiles[indexSource]);
+            lbl_listCount_source.setText(String.valueOf(listModelSource.getSize()));
+        } 
+        
+        list_destinationFiles.setModel(new DefaultListModel());
+        DefaultListModel listModelDestination = (DefaultListModel)list_destinationFiles.getModel();
+        for (int indexDestination = 0; indexDestination < anArrayDestinationFiles.length; indexDestination++)
+        {            
+            listModelDestination.add(indexDestination, anArrayDestinationFiles[indexDestination]);
+            lbl_listCount_destination.setText(String.valueOf(listModelDestination.getSize()));
         }
     }
 
@@ -43,7 +52,7 @@ public class ConverterFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        list_destinationFiles = new javax.swing.JList<>();
         btn_openSourceFolder = new javax.swing.JButton();
         btn_openDestinationFolder = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
@@ -52,16 +61,13 @@ public class ConverterFrame extends javax.swing.JFrame {
         list_sourceFiles = new javax.swing.JList<>();
         btn_close = new javax.swing.JButton();
         btn_convertToPDF = new javax.swing.JButton();
+        lbl_listCount_source = new javax.swing.JLabel();
+        lbl_listCount_destination = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(20, 20, 0, 0));
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "kp1002.xlsx", "kp1003 01.xlsx" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(list_destinationFiles);
 
         btn_openSourceFolder.setText("Quellordner öffnen");
         btn_openSourceFolder.addActionListener(new java.awt.event.ActionListener() {
@@ -81,12 +87,12 @@ public class ConverterFrame extends javax.swing.JFrame {
             }
         });
 
-        list_sourceFiles.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "kp1002.xlsx", "kp1003 01.xlsx" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         list_sourceFiles.setToolTipText("");
+        list_sourceFiles.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                list_sourceFilesValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(list_sourceFiles);
 
         btn_close.setText("Schließen");
@@ -103,24 +109,31 @@ public class ConverterFrame extends javax.swing.JFrame {
             }
         });
 
+        lbl_listCount_source.setText("123");
+
+        lbl_listCount_destination.setText("123");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_listCount_destination)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_listCount_source)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_close))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btn_convertToPDF)
+                                .addGap(27, 27, 27)))
+                        .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_close))
-                        .addGap(35, 35, 35))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_convertToPDF)
-                        .addGap(128, 128, 128)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_openDestinationFolder)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_openDestinationFolder)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(746, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -141,11 +154,16 @@ public class ConverterFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(btn_openDestinationFolder))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(btn_convertToPDF)))
-                .addGap(37, 37, 37)
+                        .addComponent(btn_openDestinationFolder)
+                        .addGap(17, 17, 17))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_convertToPDF)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_listCount_source)
+                    .addComponent(lbl_listCount_destination))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,20 +229,26 @@ public class ConverterFrame extends javax.swing.JFrame {
 
     private void btn_convertToPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_convertToPDFActionPerformed
         // TODO add your handling code here:
-        JOptionPane myDialog = new JOptionPane();
-        myDialog.showMessageDialog(null, list_sourceFiles.getSelectedValue());
-        try {
+//        JOptionPane myDialog = new JOptionPane();
+//        myDialog.showMessageDialog(null, list_sourceFiles.getSelectedValue());
             Desktop desktop = null;
+        try {
             if (desktop.isDesktopSupported()) 
             {
                 desktop = Desktop.getDesktop();
             }
-            desktop.open(new File("U:\\Ablage\\kunst_mi\\excel\\materialwirtschaft - produktion\\arbeitsvorbereitung\\1stammdaten" + list_sourceFiles.getSelectedValue()));
+            desktop.open(new File("U:\\Ablage\\kunst_mi\\excel\\materialwirtschaft - produktion\\arbeitsvorbereitung\\1stammdaten\\" + list_sourceFiles.getSelectedValue()));
             } catch (IOException ioe) 
             {
             ioe.printStackTrace();
             }
     }//GEN-LAST:event_btn_convertToPDFActionPerformed
+
+    private void list_sourceFilesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_list_sourceFilesValueChanged
+        // TODO add your handling code here:        
+        DefaultListModel listModel = (DefaultListModel)list_sourceFiles.getModel();
+        lbl_listCount_source.setText(String.valueOf(listModel.getSize()));
+    }//GEN-LAST:event_list_sourceFilesValueChanged
 
      /**
      * @param args the command line arguments
@@ -256,8 +280,10 @@ public class ConverterFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             String [] temp = new String [1];
+            String [] tempTwo = new String [1];
             temp [0] = "eins";
-            new ConverterFrame(temp).setVisible(true);
+            tempTwo [0] = "zwei";
+            new ConverterFrame(temp, tempTwo).setVisible(true);
         });
     }
 
@@ -267,11 +293,13 @@ public class ConverterFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_openDestinationFolder;
     private javax.swing.JButton btn_openSourceFolder;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbl_listCount_destination;
+    private javax.swing.JLabel lbl_listCount_source;
+    private javax.swing.JList<String> list_destinationFiles;
     private javax.swing.JList<String> list_sourceFiles;
     // End of variables declaration//GEN-END:variables
    
