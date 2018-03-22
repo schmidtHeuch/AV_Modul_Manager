@@ -8,10 +8,12 @@ package UI;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.DefaultListModel;
-import java.io.File;
-import javax.swing.JOptionPane;
-import java.awt.Desktop;
-import java.io.IOException;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.*;
+
 
 /**
  *
@@ -20,7 +22,8 @@ import java.io.IOException;
 public class ConverterFrame extends javax.swing.JFrame {       
   
     /** Creates new form ConverterFrame
-     * @param anArrayWithFiles */
+     * @param anArraySourceFiles
+     * @param anArrayDestinationFiles */
     public ConverterFrame(String [] anArraySourceFiles, String [] anArrayDestinationFiles) {
         initComponents(); 
         
@@ -30,8 +33,7 @@ public class ConverterFrame extends javax.swing.JFrame {
         {            
             listModelSource.add(indexSource, anArraySourceFiles[indexSource]);
             lbl_listCount_source.setText(String.valueOf(listModelSource.getSize()));
-        } 
-        
+        }         
         list_destinationFiles.setModel(new DefaultListModel());
         DefaultListModel listModelDestination = (DefaultListModel)list_destinationFiles.getModel();
         for (int indexDestination = 0; indexDestination < anArrayDestinationFiles.length; indexDestination++)
@@ -153,13 +155,12 @@ public class ConverterFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(btn_openDestinationFolder)
-                        .addGap(17, 17, 17))
+                        .addGap(51, 51, 51)
+                        .addComponent(btn_convertToPDF))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btn_convertToPDF)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(btn_openDestinationFolder)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_listCount_source)
                     .addComponent(lbl_listCount_destination))
@@ -194,7 +195,7 @@ public class ConverterFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         pack();
@@ -229,19 +230,47 @@ public class ConverterFrame extends javax.swing.JFrame {
 
     private void btn_convertToPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_convertToPDFActionPerformed
         // TODO add your handling code here:
-//        JOptionPane myDialog = new JOptionPane();
-//        myDialog.showMessageDialog(null, list_sourceFiles.getSelectedValue());
-            Desktop desktop = null;
-        try {
-            if (desktop.isDesktopSupported()) 
+        InputStream input = null;
+        try 
+        {
+        String myExcelPath = "U:\\Ablage\\kunst_mi\\excel\\materialwirtschaft - produktion\\arbeitsvorbereitung\\1stammdaten\\";        
+        input = new FileInputStream(myExcelPath + list_sourceFiles.getSelectedValue());
+        Workbook wb = new SSWorkbook();
+//        HSSFWorkbook wb = new HSSFWorkbook(input);
+//        HSSFSheet sheet = wb.getSheet("EON VPP Nomination");
+        for (int sheetIndex = 1; sheetIndex <= wb.getNumberOfSheets(); sheetIndex++)
+        {
+            if (!wb.getSheetName(sheetIndex).startsWith("vp"))
             {
-                desktop = Desktop.getDesktop();
+                wb.removeSheetAt(sheetIndex);
             }
-            desktop.open(new File("U:\\Ablage\\kunst_mi\\excel\\materialwirtschaft - produktion\\arbeitsvorbereitung\\1stammdaten\\" + list_sourceFiles.getSelectedValue()));
-            } catch (IOException ioe) 
+        }
+        
+        for (int sheetIndex = 1; sheetIndex <= wb.getNumberOfSheets(); sheetIndex++)
+        {
+            if (!wb.getSheetName(sheetIndex).startsWith("vp"))
             {
-            ioe.printStackTrace();
+                wb.removeSheetAt(sheetIndex);
             }
+        }        
+        }
+        catch (FileNotFoundException ex) 
+        {
+            Logger.getLogger(ConverterFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (IOException ex) 
+        {
+            Logger.getLogger(ConverterFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        finally 
+        {
+            try {
+                input.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ConverterFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }//GEN-LAST:event_btn_convertToPDFActionPerformed
 
     private void list_sourceFilesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_list_sourceFilesValueChanged
