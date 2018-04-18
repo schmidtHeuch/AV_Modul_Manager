@@ -4,16 +4,13 @@
  * and open the template in the editor.
  */
 package UI;
-import java.util.*;
-import java.io.File;
-import javax.swing.JOptionPane;
 /**
  *
  * @author schmidtu
  */
 public class AV_MM_MainFrame extends javax.swing.JFrame {
 
-    public String [] stringOfFiles; 
+//    public String [] stringOfFiles; 
     /**
      * Creates new form AV_MM_MainFrame
      */
@@ -127,65 +124,16 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private String [] getArrayOfFiles(String aPath) {
-        int myCountOfFiles;
-        File f = new File(aPath);
-        myCountOfFiles = f.list().length;
-        Vector <String> tempVector_allNeeded = new Vector <String> ();
-        for (int currentIndex = 0; currentIndex < 10; currentIndex++)
-        {   
-//            System.out.println(currentIndex);
-            if (f.list()[currentIndex].startsWith("kp"))
-            {   
-                if (!(f.list()[currentIndex].contains("vk")))
-                {
-                    if ((f.list()[currentIndex].endsWith(".xls")) || (f.list()[currentIndex].endsWith(".xlsx"))) 
-                    {
-                        tempVector_allNeeded.add(f.list()[currentIndex]);
-                    }
-                }
-            }
-        }        
-        String [] stringArrayOfFiles = new String [tempVector_allNeeded.size()];        
-        for ( int index=0; index < (tempVector_allNeeded.size()); ++index)
-        {
-            stringArrayOfFiles[index] = tempVector_allNeeded.elementAt(index);
-        }
-        Arrays.sort(stringArrayOfFiles);
-        return stringArrayOfFiles;
-    }
-/**
- *
- * @param anArrayOfStrings
- * @return
- */
-/*    private static String getFilesAsString(String anArrayOfStrings[]) {
-        String stringOfFiles;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < anArrayOfStrings.length; i++) {
-           // sb.append("\"");            
-            sb.append(anArrayOfStrings[i]);
-            sb.append(",");   
-            sb.append("\n");                     
-        }
-        stringOfFiles = sb.toString();
-        return stringOfFiles;
-        }
-*/
+      
     private void btn_openModul_ConverterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openModul_ConverterActionPerformed
         // TODO add your handling code here:
         
-        String pathWithGreenMaps = "U:\\Ablage\\kunst_mi\\excel\\materialwirtschaft - produktion\\arbeitsvorbereitung\\1stammdaten";    
-        //FilesAppendedToString allFiles = new FilesAppendedToString(pathWithGreenMaps);
-        String [] allFiles;
-        allFiles = getArrayOfFiles(pathWithGreenMaps);
-        //if (allFiles instanceof String) {
-        //    System.out.println(allFiles);
-    //}
-        ConverterFrame converterFrame = new ConverterFrame(allFiles);
+        String pathExcelGreenMaps = "U:\\Ablage\\kunsttech\\Arbeitsvorbereitung\\04_Stammdaten\\";        
+        String pathPDFGreenMaps = "W:\\diaf003bilder\\Verpackungsvorschrift2\\";
+        
+        ConverterFrame converterFrame = new ConverterFrame(pathExcelGreenMaps, pathPDFGreenMaps);
         converterFrame.setTitle("Datei-Konverter");
-        converterFrame.setSize(1024,900); 
+//        converterFrame.setSize(1024,900); 
         converterFrame.setVisible(true);  
     }//GEN-LAST:event_btn_openModul_ConverterActionPerformed
 

@@ -17,7 +17,7 @@ public class AV_Modul_Manager {
     public static void main(String[] args) {
         // TODO code application logic here
         AV_MM_MainFrame av_mainFrame = new AV_MM_MainFrame();
-        av_mainFrame.setTitle("AV-Modul-Manager");
+        av_mainFrame.setTitle("AV Modul-Manager");
         av_mainFrame.setSize(1024,900);
         av_mainFrame.setVisible(true);      
     }
