@@ -28,7 +28,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="499" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="332" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,13 +47,20 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="954" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jPanel_footer" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="363" max="-2" attributes="0"/>
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="187" max="32767" attributes="0"/>
+              </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="ToolBar_MainFrame" alignment="0" min="-2" pref="904" max="-2" attributes="0"/>
-                          <Component id="btn_close" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="panel_modulConverter" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="40" max="32767" attributes="0"/>
@@ -63,16 +70,19 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="722" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="472" max="32767" attributes="0"/>
+                  <Component id="jPanel_footer" min="-2" max="-2" attributes="0"/>
+              </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="ToolBar_MainFrame" min="-2" pref="25" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="panel_modulConverter" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="480" max="32767" attributes="0"/>
-                      <Component id="btn_close" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="431" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -86,14 +96,6 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
         </Container>
-        <Component class="javax.swing.JButton" name="btn_close">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Schlie&#xdf;en"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_closeActionPerformed"/>
-          </Events>
-        </Component>
         <Container class="javax.swing.JPanel" name="panel_modulConverter">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -108,8 +110,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btn_openModul_Converter" min="-2" pref="304" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btn_openModul_Pruefprotokoll" linkSize="1" pref="304" max="32767" attributes="0"/>
+                          <Component id="btn_openModul_Verpackungsvorschrift" linkSize="1" pref="304" max="32767" attributes="0"/>
                           <Component id="lbl_info_ModulConverter" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="21" max="32767" attributes="0"/>
@@ -122,8 +125,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lbl_info_ModulConverter" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btn_openModul_Converter" min="-2" pref="85" max="-2" attributes="0"/>
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                      <Component id="btn_openModul_Verpackungsvorschrift" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btn_openModul_Pruefprotokoll" linkSize="2" min="-2" pref="82" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -134,14 +139,92 @@
                 <Property name="text" type="java.lang.String" value="Modul: Konverter Excel -&gt; PDF"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_openModul_Converter">
+            <Component class="javax.swing.JButton" name="btn_openModul_Verpackungsvorschrift">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Modul starten: Konverter"/>
+                <Property name="text" type="java.lang.String" value="Modul: Verpackungsvorschrift"/>
                 <Property name="toolTipText" type="java.lang.String" value="&#xd6;ffnet das Modul zum Umwandeln von Excel-Dateien -&gt; PDF."/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_openModul_ConverterActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_openModul_VerpackungsvorschriftActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_openModul_Pruefprotokoll">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Modul: Pr&#xfc;fprotokoll"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_openModul_PruefprotokollActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel_footer">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_close" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btn_close" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="btn_close">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Schlie&#xdf;en"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_closeActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
+              </Border>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="360" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="123" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Modul: &#xdc;bersicht Artikel-Maschine-Schicht"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

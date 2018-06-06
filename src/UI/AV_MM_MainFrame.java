@@ -29,32 +29,36 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         ToolBar_MainFrame = new javax.swing.JToolBar();
-        btn_close = new javax.swing.JButton();
         panel_modulConverter = new javax.swing.JPanel();
         lbl_info_ModulConverter = new javax.swing.JLabel();
-        btn_openModul_Converter = new javax.swing.JButton();
+        btn_openModul_Verpackungsvorschrift = new javax.swing.JButton();
+        btn_openModul_Pruefprotokoll = new javax.swing.JButton();
+        jPanel_footer = new javax.swing.JPanel();
+        btn_close = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(20, 20, 0, 0));
 
         ToolBar_MainFrame.setRollover(true);
 
-        btn_close.setText("Schließen");
-        btn_close.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_closeActionPerformed(evt);
-            }
-        });
-
         panel_modulConverter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lbl_info_ModulConverter.setText("Modul: Konverter Excel -> PDF");
 
-        btn_openModul_Converter.setText("Modul starten: Konverter");
-        btn_openModul_Converter.setToolTipText("Öffnet das Modul zum Umwandeln von Excel-Dateien -> PDF.");
-        btn_openModul_Converter.addActionListener(new java.awt.event.ActionListener() {
+        btn_openModul_Verpackungsvorschrift.setText("Modul: Verpackungsvorschrift");
+        btn_openModul_Verpackungsvorschrift.setToolTipText("Öffnet das Modul zum Umwandeln von Excel-Dateien -> PDF.");
+        btn_openModul_Verpackungsvorschrift.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_openModul_ConverterActionPerformed(evt);
+                btn_openModul_VerpackungsvorschriftActionPerformed(evt);
+            }
+        });
+
+        btn_openModul_Pruefprotokoll.setText("Modul: Prüfprotokoll");
+        btn_openModul_Pruefprotokoll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_openModul_PruefprotokollActionPerformed(evt);
             }
         });
 
@@ -64,47 +68,107 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
             panel_modulConverterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_modulConverterLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(panel_modulConverterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_openModul_Converter, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_modulConverterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_openModul_Pruefprotokoll, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                    .addComponent(btn_openModul_Verpackungsvorschrift, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                     .addComponent(lbl_info_ModulConverter))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        panel_modulConverterLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_openModul_Pruefprotokoll, btn_openModul_Verpackungsvorschrift});
+
         panel_modulConverterLayout.setVerticalGroup(
             panel_modulConverterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_modulConverterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_info_ModulConverter)
                 .addGap(18, 18, 18)
-                .addComponent(btn_openModul_Converter, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(btn_openModul_Verpackungsvorschrift, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_openModul_Pruefprotokoll, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panel_modulConverterLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn_openModul_Pruefprotokoll, btn_openModul_Verpackungsvorschrift});
+
+        btn_close.setText("Schließen");
+        btn_close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_closeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_footerLayout = new javax.swing.GroupLayout(jPanel_footer);
+        jPanel_footer.setLayout(jPanel_footerLayout);
+        jPanel_footerLayout.setHorizontalGroup(
+            jPanel_footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_footerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_close)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel_footerLayout.setVerticalGroup(
+            jPanel_footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_footerLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_close)
+                .addContainerGap())
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel1.setText("Modul: Übersicht Artikel-Maschine-Schicht");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(360, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 954, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(363, 363, 363)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(187, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(ToolBar_MainFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_close)
                         .addComponent(panel_modulConverter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(40, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 722, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 472, Short.MAX_VALUE)
+                .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(ToolBar_MainFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addComponent(panel_modulConverter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
-                    .addComponent(btn_close)
-                    .addContainerGap()))
+                    .addContainerGap(431, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -113,7 +177,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 499, Short.MAX_VALUE))
+                .addGap(0, 332, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,22 +189,34 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
       
-    private void btn_openModul_ConverterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openModul_ConverterActionPerformed
+    private void btn_openModul_VerpackungsvorschriftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openModul_VerpackungsvorschriftActionPerformed
         // TODO add your handling code here:
         
         String pathExcelGreenMaps = "U:\\Ablage\\kunsttech\\Arbeitsvorbereitung\\04_Stammdaten\\";        
-        String pathPDFGreenMaps = "W:\\diaf003bilder\\Verpackungsvorschrift2\\";
+        String pathPDFVerpackungsvorschrift = "W:\\diaf003bilder\\Verpackungsvorschrift2\\";
         
-        ConverterFrame converterFrame = new ConverterFrame(pathExcelGreenMaps, pathPDFGreenMaps);
+        ConverterFrame converterFrame = new ConverterFrame(pathExcelGreenMaps, pathPDFVerpackungsvorschrift, "VP", "av"); //Grüne Mappe -> "Verpackungsvorschrift"
         converterFrame.setTitle("Datei-Konverter");
 //        converterFrame.setSize(1024,900); 
         converterFrame.setVisible(true);  
-    }//GEN-LAST:event_btn_openModul_ConverterActionPerformed
+    }//GEN-LAST:event_btn_openModul_VerpackungsvorschriftActionPerformed
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btn_closeActionPerformed
+
+    private void btn_openModul_PruefprotokollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openModul_PruefprotokollActionPerformed
+        // TODO add your handling code here:
+        
+        String pathExcelGreenMaps = "U:\\Ablage\\kunsttech\\Arbeitsvorbereitung\\04_Stammdaten\\";        
+        String pathPDFPruefprotokoll = "W:\\diaf003bilder\\Prüfprotokoll\\";
+        
+        ConverterFrame converterFrame = new ConverterFrame(pathExcelGreenMaps, pathPDFPruefprotokoll, "Prüf neu", "av"); //Grüne Mappe -> "Prüfprotokoll"
+        converterFrame.setTitle("Datei-Konverter");
+//        converterFrame.setSize(1024,900); 
+        converterFrame.setVisible(true);  
+    }//GEN-LAST:event_btn_openModul_PruefprotokollActionPerformed
  
     /**
      * @param args the command line arguments
@@ -174,8 +250,12 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar ToolBar_MainFrame;
     private javax.swing.JButton btn_close;
-    private javax.swing.JButton btn_openModul_Converter;
+    private javax.swing.JButton btn_openModul_Pruefprotokoll;
+    private javax.swing.JButton btn_openModul_Verpackungsvorschrift;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel_footer;
     private javax.swing.JLabel lbl_info_ModulConverter;
     private javax.swing.JPanel panel_modulConverter;
     // End of variables declaration//GEN-END:variables
