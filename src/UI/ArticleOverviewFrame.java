@@ -27,6 +27,10 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
      */
     public ArticleOverviewFrame() {
         initComponents();
+        btn_edit.setEnabled(false);
+        btn_delete.setEnabled(false);
+        btn_accept.setEnabled(false);
+        btn_cancel.setEnabled(false);
     }
     
     boolean myAnswerIfConnected;
@@ -34,6 +38,23 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     DefaultTableModel myTableModel;  
     TableRowSorter<DefaultTableModel> mySorter;
     DB_ConnectionManager MY_DBCM;
+    String Old_Key;
+    boolean Old_M1;
+    boolean Old_M2;
+    boolean Old_M3;
+    boolean Old_M4;
+    boolean Old_M5;    
+    boolean Old_M6;
+    boolean Old_M7;
+    boolean Old_M8;
+    boolean Old_M9;
+    boolean Old_M10;
+    boolean Old_M11;
+    boolean Old_M12;
+    String Old_Schicht;
+    String Old_Bemerkungen;
+    int OldSelection;
+    String DataSet_Mode;
     
     private void do_preBuild() {
                 
@@ -57,7 +78,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     private void do_postBuild() {
                 
         jTable_dbData.getSelectionModel().addListSelectionListener((ListSelectionEvent event) -> {
-            set_valuesIntoTextFields();
+            set_valuesIntoEditFields();
         });        
     }
 
@@ -71,19 +92,18 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel_table = new javax.swing.JPanel();
-        jScrollPane_dbData = new javax.swing.JScrollPane();
+        jScrollPane_table = new javax.swing.JScrollPane();
         jTable_dbData = new javax.swing.JTable();
-        jTextField_searchValue = new javax.swing.JTextField();
         lbl_searchValue = new javax.swing.JLabel();
+        jTextField_searchValue = new javax.swing.JTextField();
         btn_clearSearchValue = new javax.swing.JButton();
         lbl_rowCount = new javax.swing.JLabel();
-        jPanel_footer = new javax.swing.JPanel();
-        btn_close = new javax.swing.JButton();
         jPanel_editData = new javax.swing.JPanel();
-        jTextField_key = new javax.swing.JTextField();
         lbl_KPArtikelNummer = new javax.swing.JLabel();
-        lbl_shiftColon = new javax.swing.JLabel();
+        lbl_Schicht = new javax.swing.JLabel();
+        jTextField_key = new javax.swing.JTextField();
         jTextField_Schicht = new javax.swing.JTextField();
+        lbl_editData = new javax.swing.JLabel();
         jCheckBox_M1 = new javax.swing.JCheckBox();
         jCheckBox_M2 = new javax.swing.JCheckBox();
         jCheckBox_M3 = new javax.swing.JCheckBox();
@@ -96,35 +116,22 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         jCheckBox_M10 = new javax.swing.JCheckBox();
         jCheckBox_M11 = new javax.swing.JCheckBox();
         jCheckBox_M12 = new javax.swing.JCheckBox();
-        jPanel1 = new javax.swing.JPanel();
+        jScrollPane_remarks = new javax.swing.JScrollPane();
+        jTextArea_Bemerkungen = new javax.swing.JTextArea();
         btn_accept = new javax.swing.JButton();
         btn_cancel = new javax.swing.JButton();
-        lbl_changesColon = new javax.swing.JLabel();
-        lbl_M1_description = new javax.swing.JLabel();
-        lbl_M2_description = new javax.swing.JLabel();
-        lbl_M3_description = new javax.swing.JLabel();
-        lbl_M4_description = new javax.swing.JLabel();
-        lbl_M5_description = new javax.swing.JLabel();
-        lbl_M6_description = new javax.swing.JLabel();
-        lbl_M7_description = new javax.swing.JLabel();
-        lbl_M8_description = new javax.swing.JLabel();
-        lbl_M9_description = new javax.swing.JLabel();
-        lbl_M10_description = new javax.swing.JLabel();
-        lbl_M11_description = new javax.swing.JLabel();
-        lbl_M12_description = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        lbl_remarksColon = new javax.swing.JLabel();
+        btn_new = new javax.swing.JButton();
+        btn_edit = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
+        jPanel_footer = new javax.swing.JPanel();
+        btn_close = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 826));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
-
-        jPanel_table.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTable_dbData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,7 +142,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
@@ -150,24 +157,26 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             }
         });
         jTable_dbData.setAutoscrolls(false);
-        jScrollPane_dbData.setViewportView(jTable_dbData);
+        jScrollPane_table.setViewportView(jTable_dbData);
         if (jTable_dbData.getColumnModel().getColumnCount() > 0) {
-            jTable_dbData.getColumnModel().getColumn(0).setPreferredWidth(200);
-            jTable_dbData.getColumnModel().getColumn(1).setPreferredWidth(100);
-            jTable_dbData.getColumnModel().getColumn(2).setPreferredWidth(45);
-            jTable_dbData.getColumnModel().getColumn(3).setPreferredWidth(45);
-            jTable_dbData.getColumnModel().getColumn(4).setPreferredWidth(45);
-            jTable_dbData.getColumnModel().getColumn(5).setPreferredWidth(45);
-            jTable_dbData.getColumnModel().getColumn(6).setPreferredWidth(45);
-            jTable_dbData.getColumnModel().getColumn(7).setPreferredWidth(45);
-            jTable_dbData.getColumnModel().getColumn(8).setPreferredWidth(45);
-            jTable_dbData.getColumnModel().getColumn(9).setPreferredWidth(45);
-            jTable_dbData.getColumnModel().getColumn(10).setPreferredWidth(45);
-            jTable_dbData.getColumnModel().getColumn(11).setPreferredWidth(50);
-            jTable_dbData.getColumnModel().getColumn(12).setPreferredWidth(50);
-            jTable_dbData.getColumnModel().getColumn(13).setPreferredWidth(50);
+            jTable_dbData.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTable_dbData.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jTable_dbData.getColumnModel().getColumn(2).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(3).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(4).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(5).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(6).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(7).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(8).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(9).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(10).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(11).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(12).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(13).setPreferredWidth(40);
             jTable_dbData.getColumnModel().getColumn(14).setPreferredWidth(200);
         }
+
+        lbl_searchValue.setText("Suchen:");
 
         jTextField_searchValue.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -175,9 +184,15 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             }
         });
 
-        lbl_searchValue.setText("Suchen:");
-
         btn_clearSearchValue.setText("x");
+        btn_clearSearchValue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearSearchValueActionPerformed(evt);
+            }
+        });
+
+        lbl_rowCount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_rowCount.setPreferredSize(new java.awt.Dimension(36, 14));
 
         javax.swing.GroupLayout jPanel_tableLayout = new javax.swing.GroupLayout(jPanel_table);
         jPanel_table.setLayout(jPanel_tableLayout);
@@ -186,32 +201,212 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             .addGroup(jPanel_tableLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane_dbData, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-                    .addGroup(jPanel_tableLayout.createSequentialGroup()
-                        .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel_tableLayout.createSequentialGroup()
                         .addComponent(lbl_searchValue)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel_tableLayout.createSequentialGroup()
+                        .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_tableLayout.createSequentialGroup()
+                                .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane_table, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel_tableLayout.setVerticalGroup(
             jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tableLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_searchValue)
-                    .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lbl_searchValue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addComponent(jScrollPane_dbData, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane_table, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+        );
+
+        lbl_KPArtikelNummer.setText("KP Artikel-Nr.");
+        lbl_KPArtikelNummer.setEnabled(false);
+        lbl_KPArtikelNummer.setPreferredSize(new java.awt.Dimension(100, 14));
+
+        lbl_Schicht.setText("Schicht");
+        lbl_Schicht.setEnabled(false);
+        lbl_Schicht.setPreferredSize(new java.awt.Dimension(50, 14));
+
+        jTextField_key.setEnabled(false);
+        jTextField_key.setPreferredSize(new java.awt.Dimension(100, 20));
+
+        jTextField_Schicht.setEnabled(false);
+        jTextField_Schicht.setPreferredSize(new java.awt.Dimension(50, 20));
+
+        lbl_editData.setText("Bearbeitung:");
+
+        jCheckBox_M1.setText("<html>M 1 &nbsp &nbsp &nbsp STAL - Reinraum</html>");
+        jCheckBox_M1.setEnabled(false);
+        jCheckBox_M1.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M2.setText("<html>M 2 &nbsp &nbsp &nbsp STAL</html>");
+        jCheckBox_M2.setEnabled(false);
+        jCheckBox_M2.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M3.setText("<html>M 3 &nbsp &nbsp &nbsp Bandstahl</html>");
+        jCheckBox_M3.setEnabled(false);
+        jCheckBox_M3.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M4.setText("<html>M 4 &nbsp &nbsp &nbsp nicht verfügbar</html>");
+        jCheckBox_M4.setEnabled(false);
+        jCheckBox_M4.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M5.setText("<html>M 5 &nbsp &nbsp &nbsp Bandstahl mit Lochstanze, lange Kette</html>");
+        jCheckBox_M5.setEnabled(false);
+        jCheckBox_M5.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M6.setText("<html>M 6 &nbsp &nbsp &nbsp STAL und Bandstahl</html>");
+        jCheckBox_M6.setEnabled(false);
+        jCheckBox_M6.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M7.setText("<html>M 7 &nbsp &nbsp &nbsp Bandstahl</html>");
+        jCheckBox_M7.setEnabled(false);
+        jCheckBox_M7.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M8.setText("<html>M 8 &nbsp &nbsp &nbsp Bandstahl</html>");
+        jCheckBox_M8.setEnabled(false);
+        jCheckBox_M8.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M9.setText("<html>M 9 &nbsp &nbsp &nbsp Bandstahl - Reinraum</html>");
+        jCheckBox_M9.setEnabled(false);
+        jCheckBox_M9.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M10.setText("<html>M 10 &nbsp &nbsp Bandstahl</html>");
+        jCheckBox_M10.setEnabled(false);
+        jCheckBox_M10.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M11.setText("<html>M 11 &nbsp &nbsp besonders</html>");
+        jCheckBox_M11.setEnabled(false);
+        jCheckBox_M11.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jCheckBox_M12.setText("<html>M 12 &nbsp &nbsp STAL</html>");
+        jCheckBox_M12.setEnabled(false);
+        jCheckBox_M12.setPreferredSize(new java.awt.Dimension(300, 24));
+
+        jTextArea_Bemerkungen.setColumns(20);
+        jTextArea_Bemerkungen.setRows(2);
+        jTextArea_Bemerkungen.setBorder(javax.swing.BorderFactory.createTitledBorder("Bemerkungen"));
+        jTextArea_Bemerkungen.setEnabled(false);
+        jScrollPane_remarks.setViewportView(jTextArea_Bemerkungen);
+
+        btn_accept.setText("Übernehmen");
+
+        btn_cancel.setText("Abbrechen");
+
+        btn_new.setText("Neu");
+        btn_new.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_newActionPerformed(evt);
+            }
+        });
+
+        btn_edit.setText("Bearbeiten");
+
+        btn_delete.setText("Löschen");
+
+        javax.swing.GroupLayout jPanel_editDataLayout = new javax.swing.GroupLayout(jPanel_editData);
+        jPanel_editData.setLayout(jPanel_editDataLayout);
+        jPanel_editDataLayout.setHorizontalGroup(
+            jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                        .addComponent(lbl_KPArtikelNummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_Schicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                        .addComponent(jTextField_key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_Schicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox_M12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_M5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                        .addComponent(btn_accept)
+                        .addGap(5, 5, 5)
+                        .addComponent(btn_cancel))
+                    .addComponent(jScrollPane_remarks, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_editData)
+                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                        .addComponent(btn_new)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_edit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_delete)))
+                .addGap(0, 12, Short.MAX_VALUE))
+        );
+        jPanel_editDataLayout.setVerticalGroup(
+            jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(lbl_editData)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_KPArtikelNummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_Schicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_Schicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox_M1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox_M2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox_M3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox_M4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox_M5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox_M6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox_M7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox_M8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox_M9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox_M10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox_M11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox_M12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane_remarks, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_new)
+                    .addComponent(btn_edit)
+                    .addComponent(btn_delete))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_accept)
+                    .addComponent(btn_cancel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btn_close.setText("Schließen");
@@ -238,261 +433,24 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel_editData.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        lbl_KPArtikelNummer.setText("KP Artikel-Nr.");
-
-        lbl_shiftColon.setText("Schicht:");
-
-        jCheckBox_M1.setText("M 1");
-
-        jCheckBox_M2.setText("M 2");
-
-        jCheckBox_M3.setText("M 3");
-
-        jCheckBox_M4.setText("M 4");
-        jCheckBox_M4.setEnabled(false);
-
-        jCheckBox_M5.setText("M 5");
-
-        jCheckBox_M6.setText("M 6");
-
-        jCheckBox_M7.setText("M 7");
-
-        jCheckBox_M8.setText("M 8");
-
-        jCheckBox_M9.setText("M 9");
-
-        jCheckBox_M10.setText("M 10");
-
-        jCheckBox_M11.setText("M 11");
-
-        jCheckBox_M12.setText("M 12");
-
-        btn_accept.setText("Übernehmen");
-
-        btn_cancel.setText("Abbrechen");
-
-        lbl_changesColon.setText("Änderungen:");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_accept)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_cancel))
-                    .addComponent(lbl_changesColon))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_changesColon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_accept)
-                    .addComponent(btn_cancel))
-                .addContainerGap())
-        );
-
-        lbl_M1_description.setText("STAL- Reinraum");
-
-        lbl_M2_description.setText("STAL");
-
-        lbl_M3_description.setText("Bandstahl");
-
-        lbl_M4_description.setText("nicht verfügbar");
-        lbl_M4_description.setEnabled(false);
-
-        lbl_M5_description.setText("Bandstahl mit Lochstanze");
-
-        lbl_M6_description.setText("STAL und Bandstahl");
-
-        lbl_M7_description.setText("Bandstahl");
-
-        lbl_M8_description.setText("Bandstahl");
-
-        lbl_M9_description.setText("Bandstahl - Reinraum");
-
-        lbl_M10_description.setText("Bandstahl");
-
-        lbl_M11_description.setText("Besonders");
-
-        lbl_M12_description.setText("STAL");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        lbl_remarksColon.setText("Bemerkungen:");
-
-        javax.swing.GroupLayout jPanel_editDataLayout = new javax.swing.GroupLayout(jPanel_editData);
-        jPanel_editData.setLayout(jPanel_editDataLayout);
-        jPanel_editDataLayout.setHorizontalGroup(
-            jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel_editDataLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
-                        .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M2_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M1_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M3_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M4_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M5_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M6_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M7_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M8_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbl_KPArtikelNummer, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_key, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M10_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M9_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M11_description, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(jCheckBox_M12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_M12_description, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_editDataLayout.createSequentialGroup()
-                                .addComponent(lbl_shiftColon)
-                                .addGap(30, 30, 30)
-                                .addComponent(jTextField_Schicht, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(100, Short.MAX_VALUE))
-                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
-                        .addComponent(lbl_remarksColon)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        jPanel_editDataLayout.setVerticalGroup(
-            jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_editDataLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(lbl_KPArtikelNummer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M1)
-                    .addComponent(lbl_M1_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M2)
-                    .addComponent(lbl_M2_description))
-                .addGap(3, 3, 3)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M3)
-                    .addComponent(lbl_M3_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M4)
-                    .addComponent(lbl_M4_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M5)
-                    .addComponent(lbl_M5_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M6)
-                    .addComponent(lbl_M6_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M7)
-                    .addComponent(lbl_M7_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M8)
-                    .addComponent(lbl_M8_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M9)
-                    .addComponent(lbl_M9_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M10)
-                    .addComponent(lbl_M10_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M11)
-                    .addComponent(lbl_M11_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox_M12)
-                    .addComponent(lbl_M12_description))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_shiftColon)
-                    .addComponent(jTextField_Schicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_remarksColon)
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel_editData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel_table, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel_editData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel_editData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel_editData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -548,7 +506,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         }
         finally {
             try {
-//                set_textFieldsEmpty(); 
+                set_textFieldsEmpty(); 
                 if (myConnection != null && !myConnection.isClosed()) {
                     myConnection.close();
                 }
@@ -558,11 +516,43 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         } 
     }
     
-    private void set_valuesIntoTextFields() {
-        
-//        if (!DataSet_Mode.equals("edit")) {
+    private void set_textFieldsEmpty() {
+        jTextField_key.setText("");
+        jTextField_Schicht.setText("");
+        jTextArea_Bemerkungen.setText("");
+        jCheckBox_M1.setSelected(false);
+        jCheckBox_M2.setSelected(false);
+        jCheckBox_M3.setSelected(false);
+        jCheckBox_M4.setSelected(false);
+        jCheckBox_M5.setSelected(false);
+        jCheckBox_M6.setSelected(false);
+        jCheckBox_M7.setSelected(false);
+        jCheckBox_M8.setSelected(false);
+        jCheckBox_M9.setSelected(false);
+        jCheckBox_M10.setSelected(false);
+        jCheckBox_M11.setSelected(false);
+        jCheckBox_M12.setSelected(false);
+    }
+    
+    private void set_valuesIntoEditFields() {
+        if (!DataSet_Mode.equals("edit")) {
+            OldSelection = jTable_dbData.getSelectedRow();
+            if(OldSelection != -1) {
+                String tempString;
 
-//        }
+                int myRow = jTable_dbData.convertRowIndexToModel(OldSelection);
+                jTextField_key.setText(myTableModel.getValueAt(myRow, 0).toString().trim());
+                
+                jTextField_Schicht.setText(myTableModel.getValueAt(myRow, 1).toString().trim());
+
+                tempString = myTableModel.getValueAt(myRow, 1).toString();
+//                jFormattedTextField_Plattenstärke.setValue(Float.parseFloat(tempString));
+                jTextArea_Bemerkungen.setText(myTableModel.getValueAt(myRow, 14).toString().trim());
+                
+                btn_edit.setEnabled(true);
+                btn_delete.setEnabled(true); 
+            }  
+        }
     }
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
         // TODO add your handling code here:
@@ -580,6 +570,74 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         search();
     }//GEN-LAST:event_jTextField_searchValueKeyReleased
 
+    private void btn_clearSearchValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearSearchValueActionPerformed
+        // TODO add your handling code here:
+        jTextField_searchValue.setText("");
+        search();
+    }//GEN-LAST:event_btn_clearSearchValueActionPerformed
+
+    private void btn_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newActionPerformed
+        // TODO add your handling code here:
+        DataSet_Mode = "new";
+        set_textFieldsEnabled(true);
+        set_oldValues();
+        set_textFieldsEmpty();
+        jTextField_key.requestFocus();
+        btn_new.setEnabled(false);
+        btn_edit.setEnabled(false);
+        btn_delete.setEnabled(false);
+        btn_accept.setEnabled(true);
+        btn_cancel.setEnabled(true);
+    }//GEN-LAST:event_btn_newActionPerformed
+
+    private void set_textFieldsEnabled(boolean aBoolean) {
+        
+        for (int i=1; i < jPanel_editData.getComponentCount(); i++) {
+            System.out.println(jPanel_editData.getComponentCount());
+            if (jPanel_editData.getComponent(i).getName().startsWith("jCheckBox_") || jPanel_editData.getComponent(i).getName().startsWith("jText"))
+            jPanel_editData.getComponent(i).setEnabled(true);
+        }
+        jTextField_key.setEnabled(aBoolean);
+    }
+    
+    private void set_oldValues() {
+        Old_Key = jTextField_key.getText().trim();
+        Old_M1 = jCheckBox_M1.isSelected();
+        Old_M2 = jCheckBox_M2.isSelected();
+        Old_M3 = jCheckBox_M3.isSelected();
+        Old_M4 = jCheckBox_M4.isSelected();
+        Old_M5 = jCheckBox_M5.isSelected();    
+        Old_M6 = jCheckBox_M6.isSelected();
+        Old_M7 = jCheckBox_M7.isSelected();
+        Old_M8 = jCheckBox_M8.isSelected();
+        Old_M9 = jCheckBox_M9.isSelected();
+        Old_M10 = jCheckBox_M10.isSelected();
+        Old_M11 = jCheckBox_M11.isSelected();
+        Old_M12 = jCheckBox_M12.isSelected();
+        Old_Schicht = jTextField_Schicht.getText().trim();
+        Old_Bemerkungen = jTextArea_Bemerkungen.getText().trim();
+        
+    }
+    
+    private void get_oldValues() {
+        jTextField_key.setText(Old_Key);
+        jCheckBox_M1.setSelected(Old_M1);
+        jCheckBox_M2.setSelected(Old_M2);
+        jCheckBox_M3.setSelected(Old_M3);
+        jCheckBox_M4.setSelected(Old_M4);
+        jCheckBox_M5.setSelected(Old_M5);  
+        jCheckBox_M6.setSelected(Old_M6);
+        jCheckBox_M7.setSelected(Old_M7);
+        jCheckBox_M8.setSelected(Old_M8);
+        jCheckBox_M9.setSelected(Old_M9);
+        jCheckBox_M10.setSelected(Old_M10);
+        jCheckBox_M11.setSelected(Old_M11);
+        jCheckBox_M12.setSelected(Old_M12);
+        jTextField_Schicht.setText(Old_Schicht);
+        jTextArea_Bemerkungen.setText(Old_Bemerkungen);
+        
+    }
+    
     private void do_insertDataSet_intoDB() {        
         try
         {
@@ -706,6 +764,9 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_cancel;
     private javax.swing.JButton btn_clearSearchValue;
     private javax.swing.JButton btn_close;
+    private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_edit;
+    private javax.swing.JButton btn_new;
     private javax.swing.JCheckBox jCheckBox_M1;
     private javax.swing.JCheckBox jCheckBox_M10;
     private javax.swing.JCheckBox jCheckBox_M11;
@@ -718,34 +779,20 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox_M7;
     private javax.swing.JCheckBox jCheckBox_M8;
     private javax.swing.JCheckBox jCheckBox_M9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_editData;
     private javax.swing.JPanel jPanel_footer;
     private javax.swing.JPanel jPanel_table;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane_dbData;
+    private javax.swing.JScrollPane jScrollPane_remarks;
+    private javax.swing.JScrollPane jScrollPane_table;
     private javax.swing.JTable jTable_dbData;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea_Bemerkungen;
     private javax.swing.JTextField jTextField_Schicht;
     private javax.swing.JTextField jTextField_key;
     private javax.swing.JTextField jTextField_searchValue;
     private javax.swing.JLabel lbl_KPArtikelNummer;
-    private javax.swing.JLabel lbl_M10_description;
-    private javax.swing.JLabel lbl_M11_description;
-    private javax.swing.JLabel lbl_M12_description;
-    private javax.swing.JLabel lbl_M1_description;
-    private javax.swing.JLabel lbl_M2_description;
-    private javax.swing.JLabel lbl_M3_description;
-    private javax.swing.JLabel lbl_M4_description;
-    private javax.swing.JLabel lbl_M5_description;
-    private javax.swing.JLabel lbl_M6_description;
-    private javax.swing.JLabel lbl_M7_description;
-    private javax.swing.JLabel lbl_M8_description;
-    private javax.swing.JLabel lbl_M9_description;
-    private javax.swing.JLabel lbl_changesColon;
-    private javax.swing.JLabel lbl_remarksColon;
+    private javax.swing.JLabel lbl_Schicht;
+    private javax.swing.JLabel lbl_editData;
     private javax.swing.JLabel lbl_rowCount;
     private javax.swing.JLabel lbl_searchValue;
-    private javax.swing.JLabel lbl_shiftColon;
     // End of variables declaration//GEN-END:variables
 }
