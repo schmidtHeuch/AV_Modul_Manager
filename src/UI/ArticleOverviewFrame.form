@@ -27,9 +27,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="jPanel_table" max="32767" attributes="0"/>
+              <Component id="jPanel_table" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel_editData" min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel_editData" max="32767" attributes="0"/>
           </Group>
           <Component id="jPanel_footer" max="32767" attributes="0"/>
       </Group>
@@ -69,7 +69,7 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="lbl_rowCount" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane_table" pref="772" max="32767" attributes="0"/>
+                              <Component id="jScrollPane_table" pref="774" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -83,10 +83,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lbl_searchValue" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField_searchValue" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btn_clearSearchValue" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lbl_rowCount" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTextField_searchValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_clearSearchValue" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jScrollPane_table" min="-2" pref="856" max="-2" attributes="0"/>
@@ -108,31 +110,26 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="15" rowCount="0">
                     <Column editable="false" title="KP Artikel-Nr." type="java.lang.String"/>
-                    <Column editable="false" title="Schicht" type="java.lang.Integer"/>
-                    <Column editable="false" title="M1" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M2" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M3" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M4" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M5" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M6" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M7" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M8" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M9" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M10" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M11" type="java.lang.Boolean"/>
-                    <Column editable="false" title="M12" type="java.lang.Boolean"/>
+                    <Column editable="false" title="M1" type="java.lang.String"/>
+                    <Column editable="false" title="M2" type="java.lang.String"/>
+                    <Column editable="false" title="M3" type="java.lang.String"/>
+                    <Column editable="false" title="M4" type="java.lang.String"/>
+                    <Column editable="false" title="M5" type="java.lang.String"/>
+                    <Column editable="false" title="M6" type="java.lang.String"/>
+                    <Column editable="false" title="M7" type="java.lang.String"/>
+                    <Column editable="false" title="M8" type="java.lang.String"/>
+                    <Column editable="false" title="M9" type="java.lang.String"/>
+                    <Column editable="false" title="M10" type="java.lang.String"/>
+                    <Column editable="false" title="M11" type="java.lang.String"/>
+                    <Column editable="false" title="M12" type="java.lang.String"/>
                     <Column editable="false" title="Bemerkungen" type="java.lang.String"/>
+                    <Column editable="false" title="Schicht" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="autoscrolls" type="boolean" value="false"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -198,6 +195,11 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="200" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -288,7 +290,7 @@
                           <Component id="btn_delete" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -331,9 +333,9 @@
                   <Component id="jCheckBox_M11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jCheckBox_M12" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane_remarks" min="-2" pref="129" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jScrollPane_remarks" min="-2" pref="129" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_new" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_edit" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -391,10 +393,10 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_M1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 1 &amp;nbsp &amp;nbsp &amp;nbsp STAL - Reinraum&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 1 &amp;nbsp &amp;nbsp &amp;nbsp Reinraum -&gt; KEIN PS!!! -&gt; STAL&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
@@ -403,16 +405,16 @@
             <Property name="text" type="java.lang.String" value="&lt;html&gt;M 2 &amp;nbsp &amp;nbsp &amp;nbsp STAL&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_M3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 3 &amp;nbsp &amp;nbsp &amp;nbsp Bandstahl&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 3 &amp;nbsp &amp;nbsp &amp;nbsp Bandstahl, Schnittheizung&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
@@ -421,79 +423,79 @@
             <Property name="text" type="java.lang.String" value="&lt;html&gt;M 4 &amp;nbsp &amp;nbsp &amp;nbsp nicht verf&#xfc;gbar&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_M5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 5 &amp;nbsp &amp;nbsp &amp;nbsp Bandstahl mit Lochstanze, lange Kette&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 5 &amp;nbsp &amp;nbsp &amp;nbsp Bandstahl, Folie max. 2 mm, Lochwerkzeug, Brennstation, Schnittheizung, lange Kette&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_M6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 6 &amp;nbsp &amp;nbsp &amp;nbsp STAL und Bandstahl&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 6 &amp;nbsp &amp;nbsp &amp;nbsp Bandstahl + STAL, Wechselstaplung, Schnittheizung&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_M7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 7 &amp;nbsp &amp;nbsp &amp;nbsp Bandstahl&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 7 &amp;nbsp &amp;nbsp &amp;nbsp Bandstahl, Wechselstaplung, Schnittheizung&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_M8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 8 &amp;nbsp &amp;nbsp &amp;nbsp Bandstahl&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 8 &amp;nbsp &amp;nbsp &amp;nbsp Bandstahl, Wechselstaplung, Schnittheizung&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_M9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 9 &amp;nbsp &amp;nbsp &amp;nbsp Bandstahl - Reinraum&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 9 &amp;nbsp &amp;nbsp &amp;nbsp Reinraum -&gt; KEIN PS!!! -&gt; Bandstahl, Wechselstaplung, Schnittheizung&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_M10">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 10 &amp;nbsp &amp;nbsp Bandstahl&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 10 &amp;nbsp &amp;nbsp Bandstahl, Wechselstaplung, Schnittheizung, Handling&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_M11">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 11 &amp;nbsp &amp;nbsp besonders&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 11 &amp;nbsp &amp;nbsp Bandstahl, Schnittheizung&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_M12">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 12 &amp;nbsp &amp;nbsp STAL&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;M 12 &amp;nbsp &amp;nbsp STAL, Schnittheizung&lt;/html&gt;"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 24]"/>
+              <Dimension value="[550, 24]"/>
             </Property>
           </Properties>
         </Component>
@@ -522,11 +524,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&#xdc;bernehmen"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_acceptActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_cancel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Abbrechen"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cancelActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_new">
           <Properties>
@@ -540,11 +548,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Bearbeiten"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_delete">
           <Properties>
             <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deleteActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

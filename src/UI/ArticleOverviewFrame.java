@@ -39,25 +39,36 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     TableRowSorter<DefaultTableModel> mySorter;
     DB_ConnectionManager MY_DBCM;
     String Old_Key;
-    boolean Old_M1;
-    boolean Old_M2;
-    boolean Old_M3;
-    boolean Old_M4;
-    boolean Old_M5;    
-    boolean Old_M6;
-    boolean Old_M7;
-    boolean Old_M8;
-    boolean Old_M9;
-    boolean Old_M10;
-    boolean Old_M11;
-    boolean Old_M12;
+    String OldSelection_M1;
+    String OldSelection_M2;
+    String OldSelection_M3;
+    String OldSelection_M4 = ""; //später den anderen anpassen
+    String OldSelection_M5;    
+    String OldSelection_M6;
+    String OldSelection_M7;
+    String OldSelection_M8;
+    String OldSelection_M9;
+    String OldSelection_M10;
+    String OldSelection_M11;
+    String OldSelection_M12;
+    String CurrentSelection_M1;
+    String CurrentSelection_M2;
+    String CurrentSelection_M3;
+    String CurrentSelection_M4 = ""; //später den anderen anpassen
+    String CurrentSelection_M5;    
+    String CurrentSelection_M6;
+    String CurrentSelection_M7;
+    String CurrentSelection_M8;
+    String CurrentSelection_M9;
+    String CurrentSelection_M10;
+    String CurrentSelection_M11;
+    String CurrentSelection_M12;
     String Old_Schicht;
     String Old_Bemerkungen;
     int OldSelection;
     String DataSet_Mode;
     
-    private void do_preBuild() {
-                
+    private void do_preBuild() {                
         getDBConnection();
         get_DBTableData();
         myTableModel = (DefaultTableModel) jTable_dbData.getModel();
@@ -75,10 +86,9 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         mySorter.setRowFilter(RowFilter.regexFilter(searchTerm));
     }
     
-    private void do_postBuild() {
-                
+    private void do_postBuild() {                
         jTable_dbData.getSelectionModel().addListSelectionListener((ListSelectionEvent event) -> {
-            set_valuesIntoEditFields();
+            set_valuesIntoInputFields();
         });        
     }
 
@@ -138,11 +148,11 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "KP Artikel-Nr.", "Schicht", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12", "Bemerkungen"
+                "KP Artikel-Nr.", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12", "Bemerkungen", "Schicht"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
@@ -160,7 +170,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         jScrollPane_table.setViewportView(jTable_dbData);
         if (jTable_dbData.getColumnModel().getColumnCount() > 0) {
             jTable_dbData.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable_dbData.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jTable_dbData.getColumnModel().getColumn(1).setPreferredWidth(40);
             jTable_dbData.getColumnModel().getColumn(2).setPreferredWidth(40);
             jTable_dbData.getColumnModel().getColumn(3).setPreferredWidth(40);
             jTable_dbData.getColumnModel().getColumn(4).setPreferredWidth(40);
@@ -172,8 +182,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             jTable_dbData.getColumnModel().getColumn(10).setPreferredWidth(40);
             jTable_dbData.getColumnModel().getColumn(11).setPreferredWidth(40);
             jTable_dbData.getColumnModel().getColumn(12).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(13).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(14).setPreferredWidth(200);
+            jTable_dbData.getColumnModel().getColumn(13).setPreferredWidth(200);
+            jTable_dbData.getColumnModel().getColumn(14).setPreferredWidth(50);
         }
 
         lbl_searchValue.setText("Suchen:");
@@ -212,7 +222,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                                 .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane_table, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE))
+                            .addComponent(jScrollPane_table, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         jPanel_tableLayout.setVerticalGroup(
@@ -221,10 +231,11 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbl_searchValue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_rowCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane_table, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -246,53 +257,53 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
 
         lbl_editData.setText("Bearbeitung:");
 
-        jCheckBox_M1.setText("<html>M 1 &nbsp &nbsp &nbsp STAL - Reinraum</html>");
+        jCheckBox_M1.setText("<html>M 1 &nbsp &nbsp &nbsp Reinraum -> KEIN PS!!! -> STAL</html>");
         jCheckBox_M1.setEnabled(false);
-        jCheckBox_M1.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M1.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M2.setText("<html>M 2 &nbsp &nbsp &nbsp STAL</html>");
         jCheckBox_M2.setEnabled(false);
-        jCheckBox_M2.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M2.setPreferredSize(new java.awt.Dimension(550, 24));
 
-        jCheckBox_M3.setText("<html>M 3 &nbsp &nbsp &nbsp Bandstahl</html>");
+        jCheckBox_M3.setText("<html>M 3 &nbsp &nbsp &nbsp Bandstahl, Schnittheizung</html>");
         jCheckBox_M3.setEnabled(false);
-        jCheckBox_M3.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M3.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M4.setText("<html>M 4 &nbsp &nbsp &nbsp nicht verfügbar</html>");
         jCheckBox_M4.setEnabled(false);
-        jCheckBox_M4.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M4.setPreferredSize(new java.awt.Dimension(550, 24));
 
-        jCheckBox_M5.setText("<html>M 5 &nbsp &nbsp &nbsp Bandstahl mit Lochstanze, lange Kette</html>");
+        jCheckBox_M5.setText("<html>M 5 &nbsp &nbsp &nbsp Bandstahl, Folie max. 2 mm, Lochwerkzeug, Brennstation, Schnittheizung, lange Kette</html>");
         jCheckBox_M5.setEnabled(false);
-        jCheckBox_M5.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M5.setPreferredSize(new java.awt.Dimension(550, 24));
 
-        jCheckBox_M6.setText("<html>M 6 &nbsp &nbsp &nbsp STAL und Bandstahl</html>");
+        jCheckBox_M6.setText("<html>M 6 &nbsp &nbsp &nbsp Bandstahl + STAL, Wechselstaplung, Schnittheizung</html>");
         jCheckBox_M6.setEnabled(false);
-        jCheckBox_M6.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M6.setPreferredSize(new java.awt.Dimension(550, 24));
 
-        jCheckBox_M7.setText("<html>M 7 &nbsp &nbsp &nbsp Bandstahl</html>");
+        jCheckBox_M7.setText("<html>M 7 &nbsp &nbsp &nbsp Bandstahl, Wechselstaplung, Schnittheizung</html>");
         jCheckBox_M7.setEnabled(false);
-        jCheckBox_M7.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M7.setPreferredSize(new java.awt.Dimension(550, 24));
 
-        jCheckBox_M8.setText("<html>M 8 &nbsp &nbsp &nbsp Bandstahl</html>");
+        jCheckBox_M8.setText("<html>M 8 &nbsp &nbsp &nbsp Bandstahl, Wechselstaplung, Schnittheizung</html>");
         jCheckBox_M8.setEnabled(false);
-        jCheckBox_M8.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M8.setPreferredSize(new java.awt.Dimension(550, 24));
 
-        jCheckBox_M9.setText("<html>M 9 &nbsp &nbsp &nbsp Bandstahl - Reinraum</html>");
+        jCheckBox_M9.setText("<html>M 9 &nbsp &nbsp &nbsp Reinraum -> KEIN PS!!! -> Bandstahl, Wechselstaplung, Schnittheizung</html>");
         jCheckBox_M9.setEnabled(false);
-        jCheckBox_M9.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M9.setPreferredSize(new java.awt.Dimension(550, 24));
 
-        jCheckBox_M10.setText("<html>M 10 &nbsp &nbsp Bandstahl</html>");
+        jCheckBox_M10.setText("<html>M 10 &nbsp &nbsp Bandstahl, Wechselstaplung, Schnittheizung, Handling</html>");
         jCheckBox_M10.setEnabled(false);
-        jCheckBox_M10.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M10.setPreferredSize(new java.awt.Dimension(550, 24));
 
-        jCheckBox_M11.setText("<html>M 11 &nbsp &nbsp besonders</html>");
+        jCheckBox_M11.setText("<html>M 11 &nbsp &nbsp Bandstahl, Schnittheizung</html>");
         jCheckBox_M11.setEnabled(false);
-        jCheckBox_M11.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M11.setPreferredSize(new java.awt.Dimension(550, 24));
 
-        jCheckBox_M12.setText("<html>M 12 &nbsp &nbsp STAL</html>");
+        jCheckBox_M12.setText("<html>M 12 &nbsp &nbsp STAL, Schnittheizung</html>");
         jCheckBox_M12.setEnabled(false);
-        jCheckBox_M12.setPreferredSize(new java.awt.Dimension(300, 24));
+        jCheckBox_M12.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jTextArea_Bemerkungen.setColumns(20);
         jTextArea_Bemerkungen.setRows(2);
@@ -301,8 +312,18 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         jScrollPane_remarks.setViewportView(jTextArea_Bemerkungen);
 
         btn_accept.setText("Übernehmen");
+        btn_accept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_acceptActionPerformed(evt);
+            }
+        });
 
         btn_cancel.setText("Abbrechen");
+        btn_cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelActionPerformed(evt);
+            }
+        });
 
         btn_new.setText("Neu");
         btn_new.addActionListener(new java.awt.event.ActionListener() {
@@ -312,8 +333,18 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         });
 
         btn_edit.setText("Bearbeiten");
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
 
         btn_delete.setText("Löschen");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_editDataLayout = new javax.swing.GroupLayout(jPanel_editData);
         jPanel_editData.setLayout(jPanel_editDataLayout);
@@ -356,7 +387,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                         .addComponent(btn_edit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_delete)))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_editDataLayout.setVerticalGroup(
             jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,9 +426,9 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 .addComponent(jCheckBox_M11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox_M12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane_remarks, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane_remarks, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_new)
                     .addComponent(btn_edit)
@@ -438,9 +469,9 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel_table, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel_editData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel_editData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -467,8 +498,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         }        
     }
    
-    private void get_DBTableData() {  
-        
+    private void get_DBTableData() {         
         try
         { 
             MY_DBCM.setConnection_CLOSED("jdbc:sqlserver://HV-ABAS-SQL;databaseName=DiafBDE;integratedSecurity=true", "DISCONNECT");
@@ -488,8 +518,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                   
                 String[] myValue = new String[myColumns];
                 
-                for (int i = 1; i <= myColumns; i++) {
-                          
+                for (int i = 1; i <= myColumns; i++) {                          
                     String myDataSet = myResultSet.getString(i);
                     myValue[i-1] = myDataSet;
                 }  
@@ -506,7 +535,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         }
         finally {
             try {
-                set_textFieldsEmpty(); 
+                set_inputFieldsEmpty(); 
                 if (myConnection != null && !myConnection.isClosed()) {
                     myConnection.close();
                 }
@@ -516,14 +545,14 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         } 
     }
     
-    private void set_textFieldsEmpty() {
+    private void set_inputFieldsEmpty() {
         jTextField_key.setText("");
         jTextField_Schicht.setText("");
         jTextArea_Bemerkungen.setText("");
         jCheckBox_M1.setSelected(false);
         jCheckBox_M2.setSelected(false);
         jCheckBox_M3.setSelected(false);
-        jCheckBox_M4.setSelected(false);
+//        jCheckBox_M4.setSelected(false);
         jCheckBox_M5.setSelected(false);
         jCheckBox_M6.setSelected(false);
         jCheckBox_M7.setSelected(false);
@@ -534,25 +563,69 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         jCheckBox_M12.setSelected(false);
     }
     
-    private void set_valuesIntoEditFields() {
-        if (!DataSet_Mode.equals("edit")) {
+    private void set_valuesIntoInputFields() {
+//        if (!DataSet_Mode.equals("edit")) {
             OldSelection = jTable_dbData.getSelectedRow();
             if(OldSelection != -1) {
-                String tempString;
 
                 int myRow = jTable_dbData.convertRowIndexToModel(OldSelection);
-                jTextField_key.setText(myTableModel.getValueAt(myRow, 0).toString().trim());
                 
-                jTextField_Schicht.setText(myTableModel.getValueAt(myRow, 1).toString().trim());
-
-                tempString = myTableModel.getValueAt(myRow, 1).toString();
-//                jFormattedTextField_Plattenstärke.setValue(Float.parseFloat(tempString));
-                jTextArea_Bemerkungen.setText(myTableModel.getValueAt(myRow, 14).toString().trim());
+                jTextField_key.setText(myTableModel.getValueAt(myRow, 0).toString().trim()); 
+                if (myTableModel.getValueAt(myRow, 1).toString().equals("X")) {
+                    jCheckBox_M1.setSelected(true);
+                }
+                else {jCheckBox_M1.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 2).toString().equals("X")) {
+                    jCheckBox_M2.setSelected(true);
+                }
+                else {jCheckBox_M2.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 3).toString().equals("X")) {
+                    jCheckBox_M3.setSelected(true);
+                }
+                else {jCheckBox_M3.setSelected(false);}
+//                if (myTableModel.getValueAt(myRow, 4).toString().equals("X")) {
+//                    jCheckBox_M4.setSelected(true);
+//                }
+//                else {jCheckBox_M4.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 5).toString().equals("X")) {
+                    jCheckBox_M5.setSelected(true);
+                }
+                else {jCheckBox_M5.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 6).toString().equals("X")) {
+                    jCheckBox_M6.setSelected(true);
+                }
+                else {jCheckBox_M6.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 7).toString().equals("X")) {
+                    jCheckBox_M7.setSelected(true);
+                }
+                else {jCheckBox_M7.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 8).toString().equals("X")) {
+                    jCheckBox_M8.setSelected(true);
+                }
+                else {jCheckBox_M8.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 9).toString().equals("X")) {
+                    jCheckBox_M9.setSelected(true);
+                }
+                else {jCheckBox_M9.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 10).toString().equals("X")) {
+                    jCheckBox_M10.setSelected(true);
+                }
+                else {jCheckBox_M10.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 11).toString().equals("X")) {
+                    jCheckBox_M11.setSelected(true);
+                }
+                else {jCheckBox_M11.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 12).toString().equals("X")) {
+                    jCheckBox_M12.setSelected(true);
+                }
+                else {jCheckBox_M12.setSelected(false);}
+                jTextArea_Bemerkungen.setText(myTableModel.getValueAt(myRow, 13).toString().trim());               
+                jTextField_Schicht.setText(myTableModel.getValueAt(myRow, 14).toString().trim());
                 
                 btn_edit.setEnabled(true);
                 btn_delete.setEnabled(true); 
             }  
-        }
+//        }
     }
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
         // TODO add your handling code here:
@@ -579,10 +652,11 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     private void btn_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newActionPerformed
         // TODO add your handling code here:
         DataSet_Mode = "new";
-        set_textFieldsEnabled(true);
+        set_inputFieldsEnabled(true);
         set_oldValues();
-        set_textFieldsEmpty();
+        set_inputFieldsEmpty();
         jTextField_key.requestFocus();
+        jTextField_key.setText("KP");
         btn_new.setEnabled(false);
         btn_edit.setEnabled(false);
         btn_delete.setEnabled(false);
@@ -590,51 +664,321 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         btn_cancel.setEnabled(true);
     }//GEN-LAST:event_btn_newActionPerformed
 
-    private void set_textFieldsEnabled(boolean aBoolean) {
-        
-        for (int i=1; i < jPanel_editData.getComponentCount(); i++) {
-            System.out.println(jPanel_editData.getComponentCount());
-            if (jPanel_editData.getComponent(i).getName().startsWith("jCheckBox_") || jPanel_editData.getComponent(i).getName().startsWith("jText"))
-            jPanel_editData.getComponent(i).setEnabled(true);
+    private void btn_acceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_acceptActionPerformed
+        // TODO add your handling code here:
+        if (jTextField_key.getText().isEmpty() || jTextField_key.getText().equals("KP")) {
+            
+            JOptionPane.showMessageDialog(null,
+                    "Der Datensatz ist teilweise leer. Erfassen Sie Daten oder klicken Sie auf Abbrechen.",
+                    "Fehler",
+                    JOptionPane.ERROR_MESSAGE);
+//            return;
         }
+        else {
+            setCurrentValues();
+            boolean myAnswer = test_isDataSetInDB(jTextField_key.getText().trim());
+            
+            if (myAnswer == true) {
+                if (DataSet_Mode.equals("new")) {
+                    JOptionPane.showMessageDialog(null,
+                        "Es existiert schon ein Datensatz mit diesem Key: \n\n >> " + jTextField_key.getText().trim() + " <<.",
+                        "Fehler",
+                        JOptionPane.ERROR_MESSAGE);
+                        return;
+                }
+                if (DataSet_Mode.equals("edit")  && !OldSelection_M1.equals(CurrentSelection_M1)
+                        ||!OldSelection_M2.equals(CurrentSelection_M2)
+                        ||!OldSelection_M3.equals(CurrentSelection_M3)
+                        ||!OldSelection_M4.equals(CurrentSelection_M4)
+                        ||!OldSelection_M5.equals(CurrentSelection_M5)
+                        ||!OldSelection_M6.equals(CurrentSelection_M6)
+                        ||!OldSelection_M7.equals(CurrentSelection_M7)
+                        ||!OldSelection_M8.equals(CurrentSelection_M8)
+                        ||!OldSelection_M9.equals(CurrentSelection_M9)
+                        ||!OldSelection_M10.equals(CurrentSelection_M10)
+                        ||!OldSelection_M11.equals(CurrentSelection_M11)
+                        ||!OldSelection_M12.equals(CurrentSelection_M12)
+                        ||!Old_Bemerkungen.equals(jTextArea_Bemerkungen.getText())
+                        ||!Old_Schicht.equals(jTextField_Schicht.getText())) {                    
+                    do_updateDataSet_inDB();
+                }
+            }
+            if (myAnswer == false) {
+                if (DataSet_Mode.equals("new")) {
+                    do_insertDataSet_intoDB();
+                }
+            }
+            set_inputFieldsDisabled();  
+            btn_new.setEnabled(true);  
+            btn_accept.setEnabled(false); 
+            btn_edit.setEnabled(false);
+            btn_delete.setEnabled(false);
+            btn_cancel.setEnabled(false);  
+//            if (jTable_dbData.getSelectedRow() > -1) {
+//                
+//                btn_edit.setEnabled(true);
+//                btn_delete.setEnabled(true);                
+//            }
+//            else {                
+//                btn_edit.setEnabled(false);
+//                btn_delete.setEnabled(false);
+//            } 
+            get_DBTableData();
+            lbl_rowCount.setText(String.valueOf(myTableModel.getRowCount()));       
+        }
+    }//GEN-LAST:event_btn_acceptActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        // TODO add your handling code here:
+        DataSet_Mode = "edit";
+        set_oldValues();
+        set_inputFieldsEnabled(false);
+        btn_new.setEnabled(false);
+        btn_edit.setEnabled(false);
+        btn_delete.setEnabled(false);
+        btn_accept.setEnabled(true);
+        btn_cancel.setEnabled(true);
+    }//GEN-LAST:event_btn_editActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        // TODO add your handling code here:
+        DataSet_Mode = "delete";
+        if (DataSet_Mode.equals("delete") && test_isDataSetInDB(jTextField_key.getText().trim()) == true) {
+            int myAnswer = JOptionPane.showConfirmDialog(null,
+                    "Soll der Datensatz KP Artikel-Nr. (Key): \n\n >> " + jTextField_key.getText().trim() + " << \n\n wirklich gelöscht werden?",
+                    "Datensatz löschen?",
+                    JOptionPane.YES_NO_OPTION);   
+            if (myAnswer == 1) {
+//                return;
+            }
+            else {
+                do_deleteDataSet_inDB();  
+                get_DBTableData();
+//                set_textFieldsEmpty();
+                set_inputFieldsDisabled();
+                btn_new.setEnabled(true);
+                btn_edit.setEnabled(false);
+                btn_delete.setEnabled(false);
+                btn_accept.setEnabled(false);
+                btn_cancel.setEnabled(false);
+                lbl_rowCount.setText(String.valueOf(myTableModel.getRowCount()));         
+            }
+        }
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
+        // TODO add your handling code here:
+        get_oldValues();   
+        set_inputFieldsDisabled(); 
+        btn_new.setEnabled(true);
+        if (!Old_Key.equals("")) {
+            btn_edit.setEnabled(true);
+            btn_delete.setEnabled(true);
+        }
+        btn_accept.setEnabled(false);
+        btn_cancel.setEnabled(false);  
+    }//GEN-LAST:event_btn_cancelActionPerformed
+
+    private void set_inputFieldsEnabled(boolean aBoolean) {
+        
+        lbl_KPArtikelNummer.setEnabled(true);
+        lbl_Schicht.setEnabled(true); 
+        jTextField_Schicht.setEnabled(true);
+        jCheckBox_M1.setEnabled(true);
+        jCheckBox_M2.setEnabled(true);
+        jCheckBox_M3.setEnabled(true);
+//        jCheckBox_M4.setEnabled(true);
+        jCheckBox_M5.setEnabled(true);
+        jCheckBox_M6.setEnabled(true);
+        jCheckBox_M7.setEnabled(true);
+        jCheckBox_M8.setEnabled(true);
+        jCheckBox_M9.setEnabled(true);
+        jCheckBox_M10.setEnabled(true);
+        jCheckBox_M11.setEnabled(true);
+        jCheckBox_M12.setEnabled(true);
+        jTextArea_Bemerkungen.setEnabled(true);
         jTextField_key.setEnabled(aBoolean);
+    }
+    
+    private void set_inputFieldsDisabled() {
+        
+        lbl_KPArtikelNummer.setEnabled(false);
+        lbl_Schicht.setEnabled(false); 
+        jTextField_key.setEnabled(false);
+        jTextField_Schicht.setEnabled(false);
+        jCheckBox_M1.setEnabled(false);
+        jCheckBox_M2.setEnabled(false);
+        jCheckBox_M3.setEnabled(false);
+//        jCheckBox_M4.setEnabled(false);
+        jCheckBox_M5.setEnabled(false);
+        jCheckBox_M6.setEnabled(false);
+        jCheckBox_M7.setEnabled(false);
+        jCheckBox_M8.setEnabled(false);
+        jCheckBox_M9.setEnabled(false);
+        jCheckBox_M10.setEnabled(false);
+        jCheckBox_M11.setEnabled(false);
+        jCheckBox_M12.setEnabled(false);
+        jTextArea_Bemerkungen.setEnabled(false);
     }
     
     private void set_oldValues() {
         Old_Key = jTextField_key.getText().trim();
-        Old_M1 = jCheckBox_M1.isSelected();
-        Old_M2 = jCheckBox_M2.isSelected();
-        Old_M3 = jCheckBox_M3.isSelected();
-        Old_M4 = jCheckBox_M4.isSelected();
-        Old_M5 = jCheckBox_M5.isSelected();    
-        Old_M6 = jCheckBox_M6.isSelected();
-        Old_M7 = jCheckBox_M7.isSelected();
-        Old_M8 = jCheckBox_M8.isSelected();
-        Old_M9 = jCheckBox_M9.isSelected();
-        Old_M10 = jCheckBox_M10.isSelected();
-        Old_M11 = jCheckBox_M11.isSelected();
-        Old_M12 = jCheckBox_M12.isSelected();
+        if (jCheckBox_M1.isSelected()) {
+            OldSelection_M1 = "X";
+        }
+        else {OldSelection_M1 = "";}
+        if (jCheckBox_M2.isSelected()) {
+            OldSelection_M2 = "X";
+        }
+        else {OldSelection_M2 = "";}
+        if (jCheckBox_M3.isSelected()) {
+            OldSelection_M3 = "X";
+        }
+        else {OldSelection_M3 = "";}
+//        if (jCheckBox_M4.isSelected()) {
+//            OldSelection_M4 = "X";
+//        }
+//        else {OldSelection_M4 = "";}
+        if (jCheckBox_M5.isSelected()) {
+            OldSelection_M5 = "X";
+        }
+        else {OldSelection_M5 = "";}
+        if (jCheckBox_M6.isSelected()) {
+            OldSelection_M6 = "X";
+        }
+        else {OldSelection_M6 = "";}
+        if (jCheckBox_M7.isSelected()) {
+            OldSelection_M7 = "X";
+        }
+        else {OldSelection_M7 = "";}
+        if (jCheckBox_M8.isSelected()) {
+            OldSelection_M8 = "X";
+        }
+        else {OldSelection_M8 = "";}
+        if (jCheckBox_M9.isSelected()) {
+            OldSelection_M9 = "X";
+        }
+        else {OldSelection_M9 = "";}
+        if (jCheckBox_M10.isSelected()) {
+            OldSelection_M10 = "X";
+        }
+        else {OldSelection_M10 = "";}
+        if (jCheckBox_M11.isSelected()) {
+            OldSelection_M11 = "X";
+        }
+        else {OldSelection_M11 = "";}
+        if (jCheckBox_M12.isSelected()) {
+            OldSelection_M12 = "X";
+        }
+        else {OldSelection_M12 = "";}
         Old_Schicht = jTextField_Schicht.getText().trim();
         Old_Bemerkungen = jTextArea_Bemerkungen.getText().trim();
         
     }
     
+    private void setCurrentValues() {
+        if (jCheckBox_M1.isSelected()) {
+            CurrentSelection_M1 = "X";
+        }
+        else {CurrentSelection_M1 = "";}
+        if (jCheckBox_M2.isSelected()) {
+            CurrentSelection_M2 = "X";
+        }
+        else {CurrentSelection_M2 = "";}
+        if (jCheckBox_M3.isSelected()) {
+            CurrentSelection_M3 = "X";
+        }
+        else {CurrentSelection_M3 = "";}
+//        if (jCheckBox_M4.isSelected()) {
+//            CurrentSelection_M4 = "X";
+//        }
+//        else {CurrentSelection_M4 = "";}
+        if (jCheckBox_M5.isSelected()) {
+            CurrentSelection_M5 = "X";
+        }
+        else {CurrentSelection_M5 = "";}
+        if (jCheckBox_M6.isSelected()) {
+            CurrentSelection_M6 = "X";
+        }
+        else {CurrentSelection_M6 = "";}
+        if (jCheckBox_M7.isSelected()) {
+            CurrentSelection_M7 = "X";
+        }
+        else {CurrentSelection_M7 = "";}
+        if (jCheckBox_M8.isSelected()) {
+            CurrentSelection_M8 = "X";
+        }
+        else {CurrentSelection_M8 = "";}
+        if (jCheckBox_M9.isSelected()) {
+            CurrentSelection_M9 = "X";
+        }
+        else {CurrentSelection_M9 = "";}
+        if (jCheckBox_M10.isSelected()) {
+            CurrentSelection_M10 = "X";
+        }
+        else {CurrentSelection_M10 = "";}
+        if (jCheckBox_M11.isSelected()) {
+            CurrentSelection_M11 = "X";
+        }
+        else {CurrentSelection_M11 = "";}
+        if (jCheckBox_M12.isSelected()) {
+            CurrentSelection_M12 = "X";
+        }
+        else {CurrentSelection_M12 = "";}
+        
+    }
     private void get_oldValues() {
         jTextField_key.setText(Old_Key);
-        jCheckBox_M1.setSelected(Old_M1);
-        jCheckBox_M2.setSelected(Old_M2);
-        jCheckBox_M3.setSelected(Old_M3);
-        jCheckBox_M4.setSelected(Old_M4);
-        jCheckBox_M5.setSelected(Old_M5);  
-        jCheckBox_M6.setSelected(Old_M6);
-        jCheckBox_M7.setSelected(Old_M7);
-        jCheckBox_M8.setSelected(Old_M8);
-        jCheckBox_M9.setSelected(Old_M9);
-        jCheckBox_M10.setSelected(Old_M10);
-        jCheckBox_M11.setSelected(Old_M11);
-        jCheckBox_M12.setSelected(Old_M12);
-        jTextField_Schicht.setText(Old_Schicht);
+        if (OldSelection_M1.equals("X")) {
+            jCheckBox_M1.setSelected(true);
+        }
+        else {jCheckBox_M1.setSelected(false);}
+        if (OldSelection_M2.equals("X")) {
+            jCheckBox_M2.setSelected(true);
+        }
+        else {jCheckBox_M2.setSelected(false);}
+        if (OldSelection_M3.equals("X")) {
+            jCheckBox_M3.setSelected(true);
+        }
+        else {jCheckBox_M3.setSelected(false);}
+//        if (OldSelection_M4.equals("X")) {
+//            jCheckBox_M4.setSelected(true);
+//        }
+//        else {jCheckBox_M4.setSelected(false);}
+        if (OldSelection_M5.equals("X")) {
+            jCheckBox_M5.setSelected(true);
+        }
+        else {jCheckBox_M5.setSelected(false);}
+        if (OldSelection_M6.equals("X")) {
+            jCheckBox_M6.setSelected(true);
+        }
+        else {jCheckBox_M6.setSelected(false);}
+        if (OldSelection_M7.equals("X")) {
+            jCheckBox_M7.setSelected(true);
+        }
+        else {jCheckBox_M7.setSelected(false);}
+        if (OldSelection_M8.equals("X")) {
+            jCheckBox_M8.setSelected(true);
+        }
+        else {jCheckBox_M8.setSelected(false);}
+        if (OldSelection_M9.equals("X")) {
+            jCheckBox_M9.setSelected(true);
+        }
+        else {jCheckBox_M9.setSelected(false);}
+        if (OldSelection_M10.equals("X")) {
+            jCheckBox_M10.setSelected(true);
+        }
+        else {jCheckBox_M10.setSelected(false);}
+        if (OldSelection_M11.equals("X")) {
+            jCheckBox_M11.setSelected(true);
+        }
+        else {jCheckBox_M11.setSelected(false);}
+        if (OldSelection_M12.equals("X")) {
+            jCheckBox_M12.setSelected(true);
+        }
+        else {jCheckBox_M12.setSelected(false);}
         jTextArea_Bemerkungen.setText(Old_Bemerkungen);
+        jTextField_Schicht.setText(Old_Schicht);
         
     }
     
@@ -648,10 +992,23 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             {    
             myConnection = MY_DBCM.getConnection();
             Statement myStatement = myConnection.createStatement();
-            myStatement.executeUpdate("INSERT INTO DiafBDE.dbo.T_Artikel_Maschine_Schicht (pKey_KP, Plattenstärke)" 
-                    + "VALUES ('" + jCheckBox_M1.isSelected() + "', '" 
-                    + jCheckBox_M2.isSelected() +"')");  
-//                    + ((Number) jFormattedTextField_Segmenthöhe.getValue()).floatValue() +"')");               
+            myStatement.executeUpdate("INSERT INTO DiafBDE.dbo.T_Artikel_Maschine_Schicht (pKey_KP, M1, M2, M3, M4, M5, M6, M7, "
+                    + "M8, M9, M10, M11, M12, Bemerkungen, Schicht)" 
+                    + "VALUES ('" + jTextField_key.getText().trim() + "', '" 
+                    + CurrentSelection_M1 + "', '" 
+                    + CurrentSelection_M2 + "', '" 
+                    + CurrentSelection_M3 + "', '" 
+                    + CurrentSelection_M4 + "', '" 
+                    + CurrentSelection_M5 + "', '" 
+                    + CurrentSelection_M6 + "', '" 
+                    + CurrentSelection_M7 + "', '" 
+                    + CurrentSelection_M8 + "', '" 
+                    + CurrentSelection_M9 + "', '" 
+                    + CurrentSelection_M10 + "', '" 
+                    + CurrentSelection_M11 + "', '" 
+                    + CurrentSelection_M12 + "', '" 
+                    + jTextArea_Bemerkungen.getText().trim() + "', '" 
+                    + jTextField_Schicht.getText().trim() +"')");              
             } 
         }
         catch (/*ClassNotFoundException |*/ SQLException myException )
@@ -676,7 +1033,20 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             {   
             myConnection = MY_DBCM.getConnection();
             Statement myStatement = myConnection.createStatement();
-            myStatement.executeUpdate("UPDATE DiafBDE.dbo.T_Artikel_Maschine_Schicht SET Plattenstärke = '" + jCheckBox_M1.isSelected() +
+            myStatement.executeUpdate("UPDATE DiafBDE.dbo.T_Artikel_Maschine_Schicht SET M1 = '" + CurrentSelection_M1 +
+                    "', M2 = '" + CurrentSelection_M2 +
+                    "', M3 = '" + CurrentSelection_M3 +
+                    "', M4 = '" + CurrentSelection_M4 +
+                    "', M5 = '" + CurrentSelection_M5 +
+                    "', M6 = '" + CurrentSelection_M6 +
+                    "', M7 = '" + CurrentSelection_M7 +
+                    "', M8 = '" + CurrentSelection_M8 +
+                    "', M9 = '" + CurrentSelection_M9 +
+                    "', M10 = '" + CurrentSelection_M10 +
+                    "', M11 = '" + CurrentSelection_M11 +
+                    "', M12 = '" + CurrentSelection_M12 +
+                    "', Bemerkungen = '" + jTextArea_Bemerkungen.getText().trim() +
+                    "', Schicht = '" + jTextField_Schicht.getText().trim() +
                     "' WHERE pKey_KP = '" + jTextField_key.getText() + "'");             
             } 
         }
