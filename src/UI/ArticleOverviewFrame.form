@@ -67,6 +67,8 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btn_clearSearchValue" min="-2" pref="23" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btn_getCurrentDBData" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lbl_rowCount" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane_table" pref="774" max="32767" attributes="0"/>
@@ -88,6 +90,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextField_searchValue" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_clearSearchValue" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="btn_getCurrentDBData" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -238,6 +241,14 @@
               <Dimension value="[36, 14]"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_getCurrentDBData">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Aktualisieren"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_getCurrentDBDataActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

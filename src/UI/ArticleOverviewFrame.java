@@ -108,6 +108,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         jTextField_searchValue = new javax.swing.JTextField();
         btn_clearSearchValue = new javax.swing.JButton();
         lbl_rowCount = new javax.swing.JLabel();
+        btn_getCurrentDBData = new javax.swing.JButton();
         jPanel_editData = new javax.swing.JPanel();
         lbl_KPArtikelNummer = new javax.swing.JLabel();
         lbl_Schicht = new javax.swing.JLabel();
@@ -204,6 +205,13 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         lbl_rowCount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_rowCount.setPreferredSize(new java.awt.Dimension(36, 14));
 
+        btn_getCurrentDBData.setText("Aktualisieren");
+        btn_getCurrentDBData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_getCurrentDBDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_tableLayout = new javax.swing.GroupLayout(jPanel_table);
         jPanel_table.setLayout(jPanel_tableLayout);
         jPanel_tableLayout.setHorizontalGroup(
@@ -221,6 +229,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_getCurrentDBData)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane_table, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE))
                         .addContainerGap())))
@@ -235,7 +245,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                     .addComponent(lbl_rowCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_getCurrentDBData)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane_table, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -779,6 +790,16 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         btn_cancel.setEnabled(false);  
     }//GEN-LAST:event_btn_cancelActionPerformed
 
+    private void btn_getCurrentDBDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_getCurrentDBDataActionPerformed
+        // TODO add your handling code here:
+        get_DBTableData();
+        btn_new.setEnabled(true);
+        btn_edit.setEnabled(false);
+        btn_delete.setEnabled(false);
+        btn_accept.setEnabled(false);
+        btn_cancel.setEnabled(false);
+    }//GEN-LAST:event_btn_getCurrentDBDataActionPerformed
+
     private void set_inputFieldsEnabled(boolean aBoolean) {
         
         lbl_KPArtikelNummer.setEnabled(true);
@@ -1136,6 +1157,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_close;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_edit;
+    private javax.swing.JButton btn_getCurrentDBData;
     private javax.swing.JButton btn_new;
     private javax.swing.JCheckBox jCheckBox_M1;
     private javax.swing.JCheckBox jCheckBox_M10;
