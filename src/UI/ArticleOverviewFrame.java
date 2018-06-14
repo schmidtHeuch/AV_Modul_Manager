@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
@@ -67,6 +69,9 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     String Old_Bemerkungen;
     int OldSelection;
     String DataSet_Mode;
+    Timestamp Anlagedatum;
+    Timestamp Änderungsdatum;
+    String Benutzer;
     
     private void do_preBuild() {                
         getDBConnection();
@@ -134,6 +139,12 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         btn_new = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
+        lbl_Anlagedatum = new javax.swing.JLabel();
+        lbl_Änderungsdatum = new javax.swing.JLabel();
+        lbl_Benutzer = new javax.swing.JLabel();
+        jTextField_Anlagedatum = new javax.swing.JTextField();
+        jTextField_Änderungsdatum = new javax.swing.JTextField();
+        jTextField_Benutzer = new javax.swing.JTextField();
         jPanel_footer = new javax.swing.JPanel();
         btn_close = new javax.swing.JButton();
 
@@ -144,19 +155,21 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             }
         });
 
+        jPanel_table.setPreferredSize(new java.awt.Dimension(1080, 498));
+
         jTable_dbData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "KP Artikel-Nr.", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12", "Bemerkungen", "Schicht"
+                "KP Artikel-Nr.", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12", "Bemerkungen", "Schicht", "Anlagedatum", "Änderungsdatum", "Benutzer"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -167,24 +180,47 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable_dbData.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable_dbData.setAutoscrolls(false);
+        jTable_dbData.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane_table.setViewportView(jTable_dbData);
         if (jTable_dbData.getColumnModel().getColumnCount() > 0) {
+            jTable_dbData.getColumnModel().getColumn(0).setMinWidth(100);
             jTable_dbData.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTable_dbData.getColumnModel().getColumn(1).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(1).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(2).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(2).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(3).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(3).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(4).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(4).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(5).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(5).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(6).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(6).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(7).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(7).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(8).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(8).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(9).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(9).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(10).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(10).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(11).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(11).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(12).setMinWidth(40);
             jTable_dbData.getColumnModel().getColumn(12).setPreferredWidth(40);
+            jTable_dbData.getColumnModel().getColumn(13).setMinWidth(200);
             jTable_dbData.getColumnModel().getColumn(13).setPreferredWidth(200);
+            jTable_dbData.getColumnModel().getColumn(14).setMinWidth(50);
             jTable_dbData.getColumnModel().getColumn(14).setPreferredWidth(50);
+            jTable_dbData.getColumnModel().getColumn(15).setMinWidth(150);
+            jTable_dbData.getColumnModel().getColumn(15).setPreferredWidth(150);
+            jTable_dbData.getColumnModel().getColumn(16).setMinWidth(150);
+            jTable_dbData.getColumnModel().getColumn(16).setPreferredWidth(150);
+            jTable_dbData.getColumnModel().getColumn(17).setMinWidth(100);
+            jTable_dbData.getColumnModel().getColumn(17).setPreferredWidth(100);
         }
 
         lbl_searchValue.setText("Suchen:");
@@ -228,11 +264,11 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                                 .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_getCurrentDBData)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane_table, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE))
+                                .addComponent(btn_getCurrentDBData)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane_table, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         jPanel_tableLayout.setVerticalGroup(
@@ -248,7 +284,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                         .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_getCurrentDBData)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane_table, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane_table, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -357,48 +393,90 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             }
         });
 
+        lbl_Anlagedatum.setText("Anlagedatum:");
+        lbl_Anlagedatum.setEnabled(false);
+        lbl_Anlagedatum.setPreferredSize(new java.awt.Dimension(120, 20));
+
+        lbl_Änderungsdatum.setText("Änderungsdatum:");
+        lbl_Änderungsdatum.setEnabled(false);
+        lbl_Änderungsdatum.setPreferredSize(new java.awt.Dimension(120, 20));
+
+        lbl_Benutzer.setText("Von:");
+        lbl_Benutzer.setEnabled(false);
+        lbl_Benutzer.setPreferredSize(new java.awt.Dimension(120, 20));
+
+        jTextField_Anlagedatum.setEditable(false);
+        jTextField_Anlagedatum.setBorder(null);
+        jTextField_Anlagedatum.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jTextField_Anlagedatum.setEnabled(false);
+        jTextField_Anlagedatum.setPreferredSize(new java.awt.Dimension(204, 20));
+
+        jTextField_Änderungsdatum.setEditable(false);
+        jTextField_Änderungsdatum.setBorder(null);
+        jTextField_Änderungsdatum.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jTextField_Änderungsdatum.setEnabled(false);
+        jTextField_Änderungsdatum.setPreferredSize(new java.awt.Dimension(204, 20));
+
+        jTextField_Benutzer.setEditable(false);
+        jTextField_Benutzer.setBorder(null);
+        jTextField_Benutzer.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        jTextField_Benutzer.setEnabled(false);
+        jTextField_Benutzer.setPreferredSize(new java.awt.Dimension(204, 20));
+
         javax.swing.GroupLayout jPanel_editDataLayout = new javax.swing.GroupLayout(jPanel_editData);
         jPanel_editData.setLayout(jPanel_editDataLayout);
         jPanel_editDataLayout.setHorizontalGroup(
             jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_editDataLayout.createSequentialGroup()
                 .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                            .addComponent(lbl_KPArtikelNummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbl_Schicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                            .addComponent(jTextField_key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField_Schicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCheckBox_M12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox_M5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                            .addComponent(btn_accept)
+                            .addGap(5, 5, 5)
+                            .addComponent(btn_cancel))
+                        .addComponent(lbl_editData)
+                        .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                            .addComponent(btn_new)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btn_edit)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btn_delete))
+                        .addComponent(jScrollPane_remarks))
                     .addGroup(jPanel_editDataLayout.createSequentialGroup()
-                        .addComponent(lbl_KPArtikelNummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_Schicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
-                        .addComponent(jTextField_key, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Schicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
+                        .addContainerGap()
                         .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox_M12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox_M5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
-                        .addComponent(btn_accept)
-                        .addGap(5, 5, 5)
-                        .addComponent(btn_cancel))
-                    .addComponent(jScrollPane_remarks, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_editData)
-                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
-                        .addComponent(btn_new)
+                            .addComponent(lbl_Anlagedatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Benutzer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Änderungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_edit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_delete)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField_Anlagedatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_Benutzer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_Änderungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel_editDataLayout.setVerticalGroup(
             jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,7 +517,21 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 .addComponent(jCheckBox_M12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane_remarks, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                        .addComponent(lbl_Anlagedatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_Änderungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_Benutzer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_editDataLayout.createSequentialGroup()
+                        .addComponent(jTextField_Anlagedatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_Änderungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_Benutzer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_new)
                     .addComponent(btn_edit)
@@ -469,30 +561,34 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         );
         jPanel_footerLayout.setVerticalGroup(
             jPanel_footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_footerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_close)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(btn_close)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel_editData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel_editData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel_editData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_editData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, 946, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -528,16 +624,19 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             while (myResultSet.next()) {
                   
                 String[] myValue = new String[myColumns];
+                SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
                 
                 for (int i = 1; i <= myColumns; i++) {                          
                     String myDataSet = myResultSet.getString(i);
+                    if (myDataSet != null && i == 16 | i == 17) {
+                        Timestamp ts = Timestamp.valueOf(myDataSet);
+                        myDataSet = myFormat.format(ts);
+                    }
                     myValue[i-1] = myDataSet;
                 }  
                 myTableModel.addRow(myValue); 
             }
             if (!myResultSet.next()) {
-                
-//                return;
             } 
         }
         catch (SQLException myException )
@@ -563,7 +662,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         jCheckBox_M1.setSelected(false);
         jCheckBox_M2.setSelected(false);
         jCheckBox_M3.setSelected(false);
-//        jCheckBox_M4.setSelected(false);
+//        jCheckBox_M4.setSelected(false); <- später ändern
         jCheckBox_M5.setSelected(false);
         jCheckBox_M6.setSelected(false);
         jCheckBox_M7.setSelected(false);
@@ -632,6 +731,19 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 else {jCheckBox_M12.setSelected(false);}
                 jTextArea_Bemerkungen.setText(myTableModel.getValueAt(myRow, 13).toString().trim());               
                 jTextField_Schicht.setText(myTableModel.getValueAt(myRow, 14).toString().trim());
+                
+                if (myTableModel.getValueAt(myRow, 15) != null) {
+                    jTextField_Anlagedatum.setText(myTableModel.getValueAt(myRow, 15).toString().trim());
+                }
+                else {jTextField_Anlagedatum.setText("");}
+                if (myTableModel.getValueAt(myRow, 16) != null) {
+                   jTextField_Änderungsdatum.setText(myTableModel.getValueAt(myRow, 16).toString().trim());
+                }
+                else {jTextField_Änderungsdatum.setText("");}
+                if (myTableModel.getValueAt(myRow, 17) != null) {
+                    jTextField_Benutzer.setText(myTableModel.getValueAt(myRow, 17).toString().trim()); 
+                }
+                else {jTextField_Benutzer.setText("");}
                 
                 btn_edit.setEnabled(true);
                 btn_delete.setEnabled(true); 
@@ -1012,9 +1124,13 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             if (MY_DBCM.isConnnected()) 
             {    
             myConnection = MY_DBCM.getConnection();
+            SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+            Anlagedatum = new Timestamp(System.currentTimeMillis());
+            String result = myFormat.format(Anlagedatum);
+            Benutzer = System.getProperty("user.name"); 
             Statement myStatement = myConnection.createStatement();
             myStatement.executeUpdate("INSERT INTO DiafBDE.dbo.T_Artikel_Maschine_Schicht (pKey_KP, M1, M2, M3, M4, M5, M6, M7, "
-                    + "M8, M9, M10, M11, M12, Bemerkungen, Schicht)" 
+                    + "M8, M9, M10, M11, M12, Bemerkungen, Schicht, Anlagedatum, Benutzer)" 
                     + "VALUES ('" + jTextField_key.getText().trim() + "', '" 
                     + CurrentSelection_M1 + "', '" 
                     + CurrentSelection_M2 + "', '" 
@@ -1028,8 +1144,10 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                     + CurrentSelection_M10 + "', '" 
                     + CurrentSelection_M11 + "', '" 
                     + CurrentSelection_M12 + "', '" 
-                    + jTextArea_Bemerkungen.getText().trim() + "', '" 
-                    + jTextField_Schicht.getText().trim() +"')");              
+                    + jTextArea_Bemerkungen.getText().trim() + "', '"
+                    + jTextField_Schicht.getText().trim() + "', '" 
+                    + result + "', '" 
+                    + Benutzer +"')");              
             } 
         }
         catch (/*ClassNotFoundException |*/ SQLException myException )
@@ -1053,6 +1171,10 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             if (MY_DBCM.isConnnected()) 
             {   
             myConnection = MY_DBCM.getConnection();
+            SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+            Änderungsdatum = new Timestamp(System.currentTimeMillis());
+            String result = myFormat.format(Änderungsdatum);
+            Benutzer = System.getProperty("user.name"); 
             Statement myStatement = myConnection.createStatement();
             myStatement.executeUpdate("UPDATE DiafBDE.dbo.T_Artikel_Maschine_Schicht SET M1 = '" + CurrentSelection_M1 +
                     "', M2 = '" + CurrentSelection_M2 +
@@ -1068,6 +1190,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                     "', M12 = '" + CurrentSelection_M12 +
                     "', Bemerkungen = '" + jTextArea_Bemerkungen.getText().trim() +
                     "', Schicht = '" + jTextField_Schicht.getText().trim() +
+                    "', Änderungsdatum = '" + result +
+                    "', Benutzer = '" + Benutzer +
                     "' WHERE pKey_KP = '" + jTextField_key.getText() + "'");             
             } 
         }
@@ -1178,13 +1302,19 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane_table;
     private javax.swing.JTable jTable_dbData;
     private javax.swing.JTextArea jTextArea_Bemerkungen;
+    private javax.swing.JTextField jTextField_Anlagedatum;
+    private javax.swing.JTextField jTextField_Benutzer;
     private javax.swing.JTextField jTextField_Schicht;
     private javax.swing.JTextField jTextField_key;
     private javax.swing.JTextField jTextField_searchValue;
+    private javax.swing.JTextField jTextField_Änderungsdatum;
+    private javax.swing.JLabel lbl_Anlagedatum;
+    private javax.swing.JLabel lbl_Benutzer;
     private javax.swing.JLabel lbl_KPArtikelNummer;
     private javax.swing.JLabel lbl_Schicht;
     private javax.swing.JLabel lbl_editData;
     private javax.swing.JLabel lbl_rowCount;
     private javax.swing.JLabel lbl_searchValue;
+    private javax.swing.JLabel lbl_Änderungsdatum;
     // End of variables declaration//GEN-END:variables
 }
