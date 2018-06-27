@@ -29,6 +29,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
      */
     public ArticleOverviewFrame() {
         initComponents();
+        DataSet_Mode = "clean";
         btn_edit.setEnabled(false);
         btn_delete.setEnabled(false);
         btn_accept.setEnabled(false);
@@ -148,8 +149,11 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         jPanel_footer = new javax.swing.JPanel();
         btn_close = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -231,7 +235,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             }
         });
 
-        btn_clearSearchValue.setText("x");
+        btn_clearSearchValue.setIcon(new javax.swing.ImageIcon("U:\\Eigene\\schmidtu\\images\\Löschen.png")); // NOI18N
+        btn_clearSearchValue.setPreferredSize(new java.awt.Dimension(23, 23));
         btn_clearSearchValue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_clearSearchValueActionPerformed(evt);
@@ -263,8 +268,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                             .addGroup(jPanel_tableLayout.createSequentialGroup()
                                 .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)
                                 .addComponent(btn_getCurrentDBData)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -281,7 +286,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                     .addComponent(lbl_rowCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_getCurrentDBData)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane_table, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -612,8 +617,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             MY_DBCM = new DB_ConnectionManager("jdbc:sqlserver://HV-ABAS-SQL;databaseName=DiafBDE;integratedSecurity=true", "CONNECT");
             myConnection = MY_DBCM.getConnection();
             Statement myStatement = myConnection.createStatement();
-//            String myTempSQL = "CREATE TABLE #tempSegment FROM DiafBDE.dbo.T_Segment";
-            String mySQL = "SELECT * FROM DiafBDE.dbo.T_Artikel_Maschine_Schicht"; // ORDER BY T_Segment.pKey_KP"; // WHERE tma_abt='Technik'";
+            String mySQL = "SELECT * FROM DiafBDE.dbo.T_Artikel_Maschine_Schicht";
             ResultSet myResultSet = myStatement.executeQuery(mySQL);            
             int myColumns = myResultSet.getMetaData().getColumnCount();
             myTableModel = (DefaultTableModel) jTable_dbData.getModel();
@@ -752,7 +756,13 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     }
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        if (MY_DBCM.isConnnected()) {
+            MY_DBCM.setConnection_CLOSED("jdbc:sqlserver://HV-ABAS-SQL;databaseName=DiafBDE;integratedSecurity=true", "DISCONNECT");
+        }
+        int myReturnValue = test_continueEditing();
+            if (myReturnValue != 0 || DataSet_Mode.equals("clean")) {
+                this.dispose();
+            }
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -849,6 +859,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             get_DBTableData();
             lbl_rowCount.setText(String.valueOf(myTableModel.getRowCount()));       
         }
+        DataSet_Mode = "clean";
     }//GEN-LAST:event_btn_acceptActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
@@ -887,6 +898,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 lbl_rowCount.setText(String.valueOf(myTableModel.getRowCount()));         
             }
         }
+        DataSet_Mode = "clean";
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
@@ -899,7 +911,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             btn_delete.setEnabled(true);
         }
         btn_accept.setEnabled(false);
-        btn_cancel.setEnabled(false);  
+        btn_cancel.setEnabled(false); 
+        DataSet_Mode = "clean"; 
     }//GEN-LAST:event_btn_cancelActionPerformed
 
     private void btn_getCurrentDBDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_getCurrentDBDataActionPerformed
@@ -912,6 +925,29 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         btn_cancel.setEnabled(false);
     }//GEN-LAST:event_btn_getCurrentDBDataActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        int myReturnValue = test_continueEditing();
+            if (myReturnValue != 0) {
+                this.dispose();
+            }
+    }//GEN-LAST:event_formWindowClosing
+
+    private int test_continueEditing() {
+        int myAnswer = 0;
+        if (!DataSet_Mode.equals("clean")) {
+
+            myAnswer = JOptionPane.showOptionDialog(null, 
+            "Es existieren noch ungespeicherte Änderungenn. \n Möchten Sie die Bearbeitung fortsetzen oder das Fenster schließen?", 
+            "Bearbeitung fortsetzen?", 
+            JOptionPane.OK_CANCEL_OPTION, 
+            JOptionPane.INFORMATION_MESSAGE, 
+            null, 
+            new String[]{"Bearbeitung fortsetzen", "Fenster schließen"},
+            "default");
+            }
+        return myAnswer;
+    }
     private void set_inputFieldsEnabled(boolean aBoolean) {
         
         lbl_KPArtikelNummer.setEnabled(true);

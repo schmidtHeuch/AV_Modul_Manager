@@ -2,13 +2,14 @@
 
 <Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="0"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <Events>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
     <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
   </Events>
   <AuxValues>
@@ -80,8 +81,8 @@
                               <Group type="102" attributes="0">
                                   <Component id="jTextField_searchValue" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btn_clearSearchValue" min="-2" pref="23" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btn_clearSearchValue" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                   <Component id="btn_getCurrentDBData" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="lbl_rowCount" min="-2" pref="75" max="-2" attributes="0"/>
@@ -104,7 +105,7 @@
                       <Component id="lbl_rowCount" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextField_searchValue" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_clearSearchValue" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="btn_clearSearchValue" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_getCurrentDBData" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -265,7 +266,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_clearSearchValue">
           <Properties>
-            <Property name="text" type="java.lang.String" value="x"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="U:\Eigene\schmidtu\images\L&#xf6;schen.png"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[23, 23]"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_clearSearchValueActionPerformed"/>
