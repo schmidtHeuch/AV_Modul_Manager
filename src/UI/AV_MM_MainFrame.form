@@ -51,19 +51,19 @@
                   <Component id="jPanel_footer" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="363" max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="187" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jPanel_modul_artikelMaschineSchicht" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="437" max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ToolBar_MainFrame" alignment="0" min="-2" pref="904" max="-2" attributes="0"/>
-                          <Component id="panel_modulConverter" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="ToolBar_MainFrame" min="-2" pref="904" max="-2" attributes="0"/>
+                          <Component id="panel_modulConverter" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                      <EmptySpace pref="195" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -72,8 +72,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="472" max="32767" attributes="0"/>
+                  <Component id="jPanel_modul_artikelMaschineSchicht" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="481" max="32767" attributes="0"/>
                   <Component id="jPanel_footer" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -108,14 +108,22 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btn_openModul_Pruefprotokoll" linkSize="1" pref="304" max="32767" attributes="0"/>
-                          <Component id="btn_openModul_Verpackungsvorschrift" linkSize="1" pref="304" max="32767" attributes="0"/>
-                          <Component id="lbl_info_ModulConverter" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lbl_info_ModulConverter" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_openModul_Verpackungsvorschrift" linkSize="1" pref="304" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_openModul_Pruefprotokoll" linkSize="1" pref="304" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -141,7 +149,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btn_openModul_Verpackungsvorschrift">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Modul: Verpackungsvorschrift"/>
+                <Property name="text" type="java.lang.String" value="Verpackungsvorschrift"/>
                 <Property name="toolTipText" type="java.lang.String" value="&#xd6;ffnet das Modul zum Umwandeln von Excel-Dateien -&gt; PDF."/>
               </Properties>
               <Events>
@@ -150,7 +158,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btn_openModul_Pruefprotokoll">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Modul: Pr&#xfc;fprotokoll"/>
+                <Property name="text" type="java.lang.String" value="Pr&#xfc;fprotokoll"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_openModul_PruefprotokollActionPerformed"/>
@@ -166,7 +174,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_close" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="1012" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -191,7 +199,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="jPanel_modul_artikelMaschineSchicht">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -203,10 +211,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="360" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_openModul_Uebersicht_ArtikelMaschineSchicht" alignment="0" min="-2" pref="304" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -215,7 +226,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="123" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btn_openModul_Uebersicht_ArtikelMaschineSchicht" min="-2" pref="85" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -225,6 +238,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modul: &#xdc;bersicht Artikel-Maschine-Schicht"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_openModul_Uebersicht_ArtikelMaschineSchicht">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#xdc;bersicht: Artikel-Maschine-Schicht"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_openModul_Uebersicht_ArtikelMaschineSchichtActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

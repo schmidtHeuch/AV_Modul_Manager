@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package UI;
+
+import java.awt.Toolkit;
 /**
  *
  * @author schmidtu
@@ -35,8 +37,9 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         btn_openModul_Pruefprotokoll = new javax.swing.JButton();
         jPanel_footer = new javax.swing.JPanel();
         btn_close = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel_modul_artikelMaschineSchicht = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btn_openModul_Uebersicht_ArtikelMaschineSchicht = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(20, 20, 0, 0));
@@ -47,7 +50,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
 
         lbl_info_ModulConverter.setText("Modul: Konverter Excel -> PDF");
 
-        btn_openModul_Verpackungsvorschrift.setText("Modul: Verpackungsvorschrift");
+        btn_openModul_Verpackungsvorschrift.setText("Verpackungsvorschrift");
         btn_openModul_Verpackungsvorschrift.setToolTipText("Öffnet das Modul zum Umwandeln von Excel-Dateien -> PDF.");
         btn_openModul_Verpackungsvorschrift.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,7 +58,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
             }
         });
 
-        btn_openModul_Pruefprotokoll.setText("Modul: Prüfprotokoll");
+        btn_openModul_Pruefprotokoll.setText("Prüfprotokoll");
         btn_openModul_Pruefprotokoll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_openModul_PruefprotokollActionPerformed(evt);
@@ -67,12 +70,17 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         panel_modulConverterLayout.setHorizontalGroup(
             panel_modulConverterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_modulConverterLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panel_modulConverterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_openModul_Pruefprotokoll, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                    .addComponent(btn_openModul_Verpackungsvorschrift, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                    .addComponent(lbl_info_ModulConverter))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(panel_modulConverterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_modulConverterLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lbl_info_ModulConverter))
+                    .addGroup(panel_modulConverterLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_openModul_Verpackungsvorschrift, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
+                    .addGroup(panel_modulConverterLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_openModul_Pruefprotokoll, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panel_modulConverterLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_openModul_Pruefprotokoll, btn_openModul_Verpackungsvorschrift});
@@ -105,7 +113,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel_footerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_close)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1012, Short.MAX_VALUE))
         );
         jPanel_footerLayout.setVerticalGroup(
             jPanel_footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,25 +123,36 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel_modul_artikelMaschineSchicht.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setText("Modul: Übersicht Artikel-Maschine-Schicht");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        btn_openModul_Uebersicht_ArtikelMaschineSchicht.setText("Übersicht: Artikel-Maschine-Schicht");
+        btn_openModul_Uebersicht_ArtikelMaschineSchicht.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_openModul_Uebersicht_ArtikelMaschineSchichtActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_modul_artikelMaschineSchichtLayout = new javax.swing.GroupLayout(jPanel_modul_artikelMaschineSchicht);
+        jPanel_modul_artikelMaschineSchicht.setLayout(jPanel_modul_artikelMaschineSchichtLayout);
+        jPanel_modul_artikelMaschineSchichtLayout.setHorizontalGroup(
+            jPanel_modul_artikelMaschineSchichtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_modul_artikelMaschineSchichtLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(360, Short.MAX_VALUE))
+                .addGroup(jPanel_modul_artikelMaschineSchichtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(btn_openModul_Uebersicht_ArtikelMaschineSchicht, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel_modul_artikelMaschineSchichtLayout.setVerticalGroup(
+            jPanel_modul_artikelMaschineSchichtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_modul_artikelMaschineSchichtLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_openModul_Uebersicht_ArtikelMaschineSchicht, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -143,24 +162,24 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(363, 363, 363)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(187, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel_modul_artikelMaschineSchicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(437, 437, 437))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(ToolBar_MainFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(panel_modulConverter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(40, Short.MAX_VALUE)))
+                    .addContainerGap(195, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 472, Short.MAX_VALUE)
+                .addComponent(jPanel_modul_artikelMaschineSchicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 481, Short.MAX_VALUE)
                 .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -217,6 +236,14 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
 //        converterFrame.setSize(1024,900); 
         converterFrame.setVisible(true);  
     }//GEN-LAST:event_btn_openModul_PruefprotokollActionPerformed
+
+    private void btn_openModul_Uebersicht_ArtikelMaschineSchichtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openModul_Uebersicht_ArtikelMaschineSchichtActionPerformed
+        // TODO add your handling code here:
+        ArticleOverviewFrame articleOverviewFrame = new ArticleOverviewFrame();
+        articleOverviewFrame.setTitle("Übersicht: Artikel-Maschine-Schicht");
+        articleOverviewFrame.setSize(1400, Toolkit.getDefaultToolkit().getScreenSize().height - 30);
+        articleOverviewFrame.setVisible(true);
+    }//GEN-LAST:event_btn_openModul_Uebersicht_ArtikelMaschineSchichtActionPerformed
  
     /**
      * @param args the command line arguments
@@ -251,11 +278,12 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar ToolBar_MainFrame;
     private javax.swing.JButton btn_close;
     private javax.swing.JButton btn_openModul_Pruefprotokoll;
+    private javax.swing.JButton btn_openModul_Uebersicht_ArtikelMaschineSchicht;
     private javax.swing.JButton btn_openModul_Verpackungsvorschrift;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_footer;
+    private javax.swing.JPanel jPanel_modul_artikelMaschineSchicht;
     private javax.swing.JLabel lbl_info_ModulConverter;
     private javax.swing.JPanel panel_modulConverter;
     // End of variables declaration//GEN-END:variables
