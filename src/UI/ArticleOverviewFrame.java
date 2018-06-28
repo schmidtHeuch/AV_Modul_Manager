@@ -191,41 +191,23 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         jTable_dbData.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane_table.setViewportView(jTable_dbData);
         if (jTable_dbData.getColumnModel().getColumnCount() > 0) {
-            jTable_dbData.getColumnModel().getColumn(0).setMinWidth(100);
-            jTable_dbData.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable_dbData.getColumnModel().getColumn(1).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(1).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(2).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(2).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(3).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(3).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(4).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(4).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(5).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(5).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(6).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(6).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(7).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(7).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(8).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(8).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(9).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(9).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(10).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(10).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(11).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(11).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(12).setMinWidth(40);
-            jTable_dbData.getColumnModel().getColumn(12).setPreferredWidth(40);
-            jTable_dbData.getColumnModel().getColumn(13).setMinWidth(200);
+            jTable_dbData.getColumnModel().getColumn(0).setPreferredWidth(90);
+            jTable_dbData.getColumnModel().getColumn(1).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(2).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(3).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(4).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(5).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(6).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(7).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(8).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(9).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(10).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(11).setPreferredWidth(30);
+            jTable_dbData.getColumnModel().getColumn(12).setPreferredWidth(30);
             jTable_dbData.getColumnModel().getColumn(13).setPreferredWidth(200);
-            jTable_dbData.getColumnModel().getColumn(14).setMinWidth(50);
             jTable_dbData.getColumnModel().getColumn(14).setPreferredWidth(50);
-            jTable_dbData.getColumnModel().getColumn(15).setMinWidth(150);
             jTable_dbData.getColumnModel().getColumn(15).setPreferredWidth(150);
-            jTable_dbData.getColumnModel().getColumn(16).setMinWidth(150);
             jTable_dbData.getColumnModel().getColumn(16).setPreferredWidth(150);
-            jTable_dbData.getColumnModel().getColumn(17).setMinWidth(100);
             jTable_dbData.getColumnModel().getColumn(17).setPreferredWidth(100);
         }
 
@@ -261,22 +243,24 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_tableLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel_tableLayout.createSequentialGroup()
+                        .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_deleteSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(btn_getCurrentDBData)
+                        .addGap(99, 99, 99)
+                        .addComponent(lbl_rowCount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel_tableLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lbl_searchValue)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel_tableLayout.createSequentialGroup()
-                        .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_tableLayout.createSequentialGroup()
-                                .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_deleteSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11)
-                                .addComponent(btn_getCurrentDBData)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane_table, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addGap(623, 623, 623))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tableLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane_table, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel_tableLayout.setVerticalGroup(
             jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,11 +269,11 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 .addComponent(lbl_searchValue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_rowCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_deleteSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_getCurrentDBData)))
+                        .addComponent(btn_getCurrentDBData))
+                    .addComponent(lbl_rowCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane_table, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -483,7 +467,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                             .addComponent(jTextField_Anlagedatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField_Benutzer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField_Änderungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel_editDataLayout.setVerticalGroup(
             jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,7 +548,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             .addGroup(jPanel_footerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_close)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1174, Short.MAX_VALUE))
         );
         jPanel_footerLayout.setVerticalGroup(
             jPanel_footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,13 +563,13 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel_editData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(42, 42, 42))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
