@@ -5,6 +5,7 @@
  */
 package av_modul_manager;
 import UI.AV_MM_MainFrame;
+import java.awt.Toolkit;
 /**
  *
  * @author schmidtu
@@ -18,7 +19,8 @@ public class AV_Modul_Manager {
         // TODO code application logic here
         AV_MM_MainFrame av_mainFrame = new AV_MM_MainFrame();
         av_mainFrame.setTitle("AV Modul-Manager");
-        av_mainFrame.setSize(1024,900);
+        av_mainFrame.setSize(345, Toolkit.getDefaultToolkit().getScreenSize().height - 30);
+        av_mainFrame.setLocation(0, 0);
         av_mainFrame.setVisible(true);      
     }
     
