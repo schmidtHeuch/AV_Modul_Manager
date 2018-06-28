@@ -53,7 +53,6 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel_footer" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -81,11 +80,11 @@
                               <Group type="102" attributes="0">
                                   <Component id="jTextField_searchValue" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btn_clearSearchValue" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_deleteSearchValue" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                   <Component id="btn_getCurrentDBData" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="lbl_rowCount" min="-2" pref="75" max="-2" attributes="0"/>
+                                  <Component id="lbl_rowCount" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane_table" pref="798" max="32767" attributes="0"/>
                           </Group>
@@ -105,7 +104,7 @@
                       <Component id="lbl_rowCount" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextField_searchValue" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_clearSearchValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_deleteSearchValue" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_getCurrentDBData" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -264,7 +263,7 @@
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField_searchValueKeyReleased"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_clearSearchValue">
+        <Component class="javax.swing.JButton" name="btn_deleteSearchValue">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="U:\Eigene\schmidtu\images\L&#xf6;schen.png"/>
@@ -274,14 +273,14 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_clearSearchValueActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deleteSearchValueActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_rowCount">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[36, 14]"/>
+              <Dimension value="[300, 14]"/>
             </Property>
           </Properties>
         </Component>
@@ -735,7 +734,10 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="btn_close" min="-2" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Component id="btn_close" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>

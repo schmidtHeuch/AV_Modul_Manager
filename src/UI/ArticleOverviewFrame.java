@@ -73,13 +73,15 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     Timestamp Anlagedatum;
     Timestamp Änderungsdatum;
     String Benutzer;
+    int statementResult;
+    int TableColumns;
     
     private void do_preBuild() {                
         getDBConnection();
         get_DBTableData();
-        myTableModel = (DefaultTableModel) jTable_dbData.getModel();
-        lbl_rowCount.setText(String.valueOf(myTableModel.getRowCount()));        
+        myTableModel = (DefaultTableModel) jTable_dbData.getModel();      
         createRowSorter(myTableModel);
+        lbl_rowCount.setText(String.valueOf(mySorter.getViewRowCount()) + " / " + String.valueOf(myTableModel.getRowCount()));  
     }
     
     private void createRowSorter(DefaultTableModel aModel) {
@@ -112,7 +114,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         jTable_dbData = new javax.swing.JTable();
         lbl_searchValue = new javax.swing.JLabel();
         jTextField_searchValue = new javax.swing.JTextField();
-        btn_clearSearchValue = new javax.swing.JButton();
+        btn_deleteSearchValue = new javax.swing.JButton();
         lbl_rowCount = new javax.swing.JLabel();
         btn_getCurrentDBData = new javax.swing.JButton();
         jPanel_editData = new javax.swing.JPanel();
@@ -235,16 +237,16 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             }
         });
 
-        btn_clearSearchValue.setIcon(new javax.swing.ImageIcon("U:\\Eigene\\schmidtu\\images\\Löschen.png")); // NOI18N
-        btn_clearSearchValue.setPreferredSize(new java.awt.Dimension(23, 23));
-        btn_clearSearchValue.addActionListener(new java.awt.event.ActionListener() {
+        btn_deleteSearchValue.setIcon(new javax.swing.ImageIcon("U:\\Eigene\\schmidtu\\images\\Löschen.png")); // NOI18N
+        btn_deleteSearchValue.setPreferredSize(new java.awt.Dimension(23, 23));
+        btn_deleteSearchValue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_clearSearchValueActionPerformed(evt);
+                btn_deleteSearchValueActionPerformed(evt);
             }
         });
 
         lbl_rowCount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_rowCount.setPreferredSize(new java.awt.Dimension(36, 14));
+        lbl_rowCount.setPreferredSize(new java.awt.Dimension(300, 14));
 
         btn_getCurrentDBData.setText("Aktualisieren");
         btn_getCurrentDBData.addActionListener(new java.awt.event.ActionListener() {
@@ -268,11 +270,11 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                             .addGroup(jPanel_tableLayout.createSequentialGroup()
                                 .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_deleteSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(11, 11, 11)
                                 .addComponent(btn_getCurrentDBData)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lbl_rowCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane_table, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE))
                         .addContainerGap())))
         );
@@ -286,7 +288,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                     .addComponent(lbl_rowCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_clearSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_deleteSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_getCurrentDBData)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane_table, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -566,7 +568,9 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         );
         jPanel_footerLayout.setVerticalGroup(
             jPanel_footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_close)
+            .addGroup(jPanel_footerLayout.createSequentialGroup()
+                .addComponent(btn_close)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -592,8 +596,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                         .addComponent(jPanel_table, javax.swing.GroupLayout.PREFERRED_SIZE, 946, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -619,7 +622,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             Statement myStatement = myConnection.createStatement();
             String mySQL = "SELECT * FROM DiafBDE.dbo.T_Artikel_Maschine_Schicht";
             ResultSet myResultSet = myStatement.executeQuery(mySQL);            
-            int myColumns = myResultSet.getMetaData().getColumnCount();
+            TableColumns = myResultSet.getMetaData().getColumnCount();
             myTableModel = (DefaultTableModel) jTable_dbData.getModel();
             int allOldRows = myTableModel.getRowCount();
             if (allOldRows > 0) {
@@ -627,12 +630,12 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             }
             while (myResultSet.next()) {
                   
-                String[] myValue = new String[myColumns];
+                String[] myValue = new String[TableColumns];
                 SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
                 
-                for (int i = 1; i <= myColumns; i++) {                          
+                for (int i = 1; i <= TableColumns; i++) {                          
                     String myDataSet = myResultSet.getString(i);
-                    if (myDataSet != null && i == 16 | i == 17) {
+                    if (myDataSet != null && i == 16 || myDataSet != null && i == 17) {
                         Timestamp ts = Timestamp.valueOf(myDataSet);
                         myDataSet = myFormat.format(ts);
                     }
@@ -659,101 +662,6 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         } 
     }
     
-    private void set_inputFieldsEmpty() {
-        jTextField_key.setText("");
-        jTextField_Schicht.setText("");
-        jTextArea_Bemerkungen.setText("");
-        jCheckBox_M1.setSelected(false);
-        jCheckBox_M2.setSelected(false);
-        jCheckBox_M3.setSelected(false);
-//        jCheckBox_M4.setSelected(false); <- später ändern
-        jCheckBox_M5.setSelected(false);
-        jCheckBox_M6.setSelected(false);
-        jCheckBox_M7.setSelected(false);
-        jCheckBox_M8.setSelected(false);
-        jCheckBox_M9.setSelected(false);
-        jCheckBox_M10.setSelected(false);
-        jCheckBox_M11.setSelected(false);
-        jCheckBox_M12.setSelected(false);
-    }
-    
-    private void set_valuesIntoInputFields() {
-//        if (!DataSet_Mode.equals("edit")) {
-            OldSelection = jTable_dbData.getSelectedRow();
-            if(OldSelection != -1) {
-
-                int myRow = jTable_dbData.convertRowIndexToModel(OldSelection);
-                
-                jTextField_key.setText(myTableModel.getValueAt(myRow, 0).toString().trim()); 
-                if (myTableModel.getValueAt(myRow, 1).toString().equals("X")) {
-                    jCheckBox_M1.setSelected(true);
-                }
-                else {jCheckBox_M1.setSelected(false);}
-                if (myTableModel.getValueAt(myRow, 2).toString().equals("X")) {
-                    jCheckBox_M2.setSelected(true);
-                }
-                else {jCheckBox_M2.setSelected(false);}
-                if (myTableModel.getValueAt(myRow, 3).toString().equals("X")) {
-                    jCheckBox_M3.setSelected(true);
-                }
-                else {jCheckBox_M3.setSelected(false);}
-//                if (myTableModel.getValueAt(myRow, 4).toString().equals("X")) {
-//                    jCheckBox_M4.setSelected(true);
-//                }
-//                else {jCheckBox_M4.setSelected(false);}
-                if (myTableModel.getValueAt(myRow, 5).toString().equals("X")) {
-                    jCheckBox_M5.setSelected(true);
-                }
-                else {jCheckBox_M5.setSelected(false);}
-                if (myTableModel.getValueAt(myRow, 6).toString().equals("X")) {
-                    jCheckBox_M6.setSelected(true);
-                }
-                else {jCheckBox_M6.setSelected(false);}
-                if (myTableModel.getValueAt(myRow, 7).toString().equals("X")) {
-                    jCheckBox_M7.setSelected(true);
-                }
-                else {jCheckBox_M7.setSelected(false);}
-                if (myTableModel.getValueAt(myRow, 8).toString().equals("X")) {
-                    jCheckBox_M8.setSelected(true);
-                }
-                else {jCheckBox_M8.setSelected(false);}
-                if (myTableModel.getValueAt(myRow, 9).toString().equals("X")) {
-                    jCheckBox_M9.setSelected(true);
-                }
-                else {jCheckBox_M9.setSelected(false);}
-                if (myTableModel.getValueAt(myRow, 10).toString().equals("X")) {
-                    jCheckBox_M10.setSelected(true);
-                }
-                else {jCheckBox_M10.setSelected(false);}
-                if (myTableModel.getValueAt(myRow, 11).toString().equals("X")) {
-                    jCheckBox_M11.setSelected(true);
-                }
-                else {jCheckBox_M11.setSelected(false);}
-                if (myTableModel.getValueAt(myRow, 12).toString().equals("X")) {
-                    jCheckBox_M12.setSelected(true);
-                }
-                else {jCheckBox_M12.setSelected(false);}
-                jTextArea_Bemerkungen.setText(myTableModel.getValueAt(myRow, 13).toString().trim());               
-                jTextField_Schicht.setText(myTableModel.getValueAt(myRow, 14).toString().trim());
-                
-                if (myTableModel.getValueAt(myRow, 15) != null) {
-                    jTextField_Anlagedatum.setText(myTableModel.getValueAt(myRow, 15).toString().trim());
-                }
-                else {jTextField_Anlagedatum.setText("");}
-                if (myTableModel.getValueAt(myRow, 16) != null) {
-                   jTextField_Änderungsdatum.setText(myTableModel.getValueAt(myRow, 16).toString().trim());
-                }
-                else {jTextField_Änderungsdatum.setText("");}
-                if (myTableModel.getValueAt(myRow, 17) != null) {
-                    jTextField_Benutzer.setText(myTableModel.getValueAt(myRow, 17).toString().trim()); 
-                }
-                else {jTextField_Benutzer.setText("");}
-                
-                btn_edit.setEnabled(true);
-                btn_delete.setEnabled(true); 
-            }  
-//        }
-    }
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
         // TODO add your handling code here:
         if (MY_DBCM.isConnnected()) {
@@ -774,19 +682,22 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     private void jTextField_searchValueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_searchValueKeyReleased
         // TODO add your handling code here:
         search();
+        lbl_rowCount.setText(String.valueOf(mySorter.getViewRowCount()) + " / " + String.valueOf(myTableModel.getRowCount()));
     }//GEN-LAST:event_jTextField_searchValueKeyReleased
 
-    private void btn_clearSearchValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearSearchValueActionPerformed
+    private void btn_deleteSearchValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteSearchValueActionPerformed
         // TODO add your handling code here:
         jTextField_searchValue.setText("");
         search();
-    }//GEN-LAST:event_btn_clearSearchValueActionPerformed
+        lbl_rowCount.setText(String.valueOf(mySorter.getViewRowCount()) + " / " + String.valueOf(myTableModel.getRowCount()));
+    }//GEN-LAST:event_btn_deleteSearchValueActionPerformed
 
     private void btn_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newActionPerformed
         // TODO add your handling code here:
         DataSet_Mode = "new";
         set_inputFieldsEnabled(true);
         set_oldValues();
+        set_tableEnabled(false);
         set_inputFieldsEmpty();
         jTextField_key.requestFocus();
         jTextField_key.setText("KP");
@@ -856,8 +767,9 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
 //                btn_edit.setEnabled(false);
 //                btn_delete.setEnabled(false);
 //            } 
+            set_tableEnabled(true);
             get_DBTableData();
-            lbl_rowCount.setText(String.valueOf(myTableModel.getRowCount()));       
+            lbl_rowCount.setText(String.valueOf(mySorter.getViewRowCount()) + " / " + String.valueOf(myTableModel.getRowCount()));     
         }
         DataSet_Mode = "clean";
     }//GEN-LAST:event_btn_acceptActionPerformed
@@ -866,6 +778,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DataSet_Mode = "edit";
         set_oldValues();
+        set_tableEnabled(false);
         set_inputFieldsEnabled(false);
         btn_new.setEnabled(false);
         btn_edit.setEnabled(false);
@@ -881,12 +794,14 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             int myAnswer = JOptionPane.showConfirmDialog(null,
                     "Soll der Datensatz KP Artikel-Nr. (Key): \n\n >> " + jTextField_key.getText().trim() + " << \n\n wirklich gelöscht werden?",
                     "Datensatz löschen?",
-                    JOptionPane.YES_NO_OPTION);   
-            if (myAnswer == 1) {
-//                return;
-            }
-            else {
-                do_deleteDataSet_inDB();  
+                    JOptionPane.YES_NO_OPTION);
+            if (myAnswer == 0) {
+                statementResult = 0;
+                statementResult = do_deleteDataSet_inDB();
+                if (statementResult == 0) {
+                    JOptionPane.showMessageDialog(null,
+                    "Dieser Datensatz kann nicht gelöscht werden, da er von anderen Daten referenziert wird.");
+                }  
                 get_DBTableData();
 //                set_textFieldsEmpty();
                 set_inputFieldsDisabled();
@@ -895,7 +810,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 btn_delete.setEnabled(false);
                 btn_accept.setEnabled(false);
                 btn_cancel.setEnabled(false);
-                lbl_rowCount.setText(String.valueOf(myTableModel.getRowCount()));         
+                lbl_rowCount.setText(String.valueOf(mySorter.getViewRowCount()) + " / " + String.valueOf(myTableModel.getRowCount()));       
             }
         }
         DataSet_Mode = "clean";
@@ -912,6 +827,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         }
         btn_accept.setEnabled(false);
         btn_cancel.setEnabled(false); 
+        set_tableEnabled(true);
         DataSet_Mode = "clean"; 
     }//GEN-LAST:event_btn_cancelActionPerformed
 
@@ -947,6 +863,104 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             "default");
             }
         return myAnswer;
+    }
+    private void set_inputFieldsEmpty() {
+        jTextField_key.setText("");
+        jTextField_Schicht.setText("");
+        jTextArea_Bemerkungen.setText("");
+        jCheckBox_M1.setSelected(false);
+        jCheckBox_M2.setSelected(false);
+        jCheckBox_M3.setSelected(false);
+//        jCheckBox_M4.setSelected(false); <- später ändern
+        jCheckBox_M5.setSelected(false);
+        jCheckBox_M6.setSelected(false);
+        jCheckBox_M7.setSelected(false);
+        jCheckBox_M8.setSelected(false);
+        jCheckBox_M9.setSelected(false);
+        jCheckBox_M10.setSelected(false);
+        jCheckBox_M11.setSelected(false);
+        jCheckBox_M12.setSelected(false);
+        jTextField_Anlagedatum.setText("");
+        jTextField_Änderungsdatum.setText("");
+        jTextField_Benutzer.setText("");
+    }
+    
+    private void set_valuesIntoInputFields() {
+//        if (!DataSet_Mode.equals("edit")) {
+            OldSelection = jTable_dbData.getSelectedRow();
+            if(OldSelection != -1) {
+
+                int myRow = jTable_dbData.convertRowIndexToModel(OldSelection);                
+                jTextField_key.setText(myTableModel.getValueAt(myRow, 0).toString().trim()); 
+                
+                if (myTableModel.getValueAt(myRow, 1) != null && myTableModel.getValueAt(myRow, 1).toString().equals("X")) {
+                    jCheckBox_M1.setSelected(true);
+                }
+                else {jCheckBox_M1.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 2) != null && myTableModel.getValueAt(myRow, 2).toString().equals("X")) {
+                    jCheckBox_M2.setSelected(true);
+                }
+                else {jCheckBox_M2.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 3) != null && myTableModel.getValueAt(myRow, 3).toString().equals("X")) {
+                    jCheckBox_M3.setSelected(true);
+                }
+                else {jCheckBox_M3.setSelected(false);}
+//                if (myTableModel.getValueAt(myRow, 4).toString().equals("X")) {
+//                    jCheckBox_M4.setSelected(true);
+//                }
+//                else {jCheckBox_M4.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 5) != null && myTableModel.getValueAt(myRow, 5).toString().equals("X")) {
+                    jCheckBox_M5.setSelected(true);
+                }
+                else {jCheckBox_M5.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 6) != null && myTableModel.getValueAt(myRow, 6).toString().equals("X")) {
+                    jCheckBox_M6.setSelected(true);
+                }
+                else {jCheckBox_M6.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 7) != null && myTableModel.getValueAt(myRow, 7).toString().equals("X")) {
+                    jCheckBox_M7.setSelected(true);
+                }
+                else {jCheckBox_M7.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 8) != null && myTableModel.getValueAt(myRow, 8).toString().equals("X")) {
+                    jCheckBox_M8.setSelected(true);
+                }
+                else {jCheckBox_M8.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 9) != null && myTableModel.getValueAt(myRow, 9).toString().equals("X")) {
+                    jCheckBox_M9.setSelected(true);
+                }
+                else {jCheckBox_M9.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 10) != null && myTableModel.getValueAt(myRow, 10).toString().equals("X")) {
+                    jCheckBox_M10.setSelected(true);
+                }
+                else {jCheckBox_M10.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 11) != null && myTableModel.getValueAt(myRow, 11).toString().equals("X")) {
+                    jCheckBox_M11.setSelected(true);
+                }
+                else {jCheckBox_M11.setSelected(false);}
+                if (myTableModel.getValueAt(myRow, 12) != null && myTableModel.getValueAt(myRow, 12).toString().equals("X")) {
+                    jCheckBox_M12.setSelected(true);
+                }
+                else {jCheckBox_M12.setSelected(false);}
+                jTextArea_Bemerkungen.setText(myTableModel.getValueAt(myRow, 13).toString().trim());               
+                jTextField_Schicht.setText(myTableModel.getValueAt(myRow, 14).toString().trim());
+                
+                if (myTableModel.getValueAt(myRow, 15) != null) {
+                    jTextField_Anlagedatum.setText(myTableModel.getValueAt(myRow, 15).toString().trim());
+                }
+                else {jTextField_Anlagedatum.setText("");}
+                if (myTableModel.getValueAt(myRow, 16) != null) {
+                   jTextField_Änderungsdatum.setText(myTableModel.getValueAt(myRow, 16).toString().trim());
+                }
+                else {jTextField_Änderungsdatum.setText("");}
+                if (myTableModel.getValueAt(myRow, 17) != null) {
+                    jTextField_Benutzer.setText(myTableModel.getValueAt(myRow, 17).toString().trim()); 
+                }
+                else {jTextField_Benutzer.setText("");}
+                
+                btn_edit.setEnabled(true);
+                btn_delete.setEnabled(true); 
+            }  
+//        }
     }
     private void set_inputFieldsEnabled(boolean aBoolean) {
         
@@ -1244,7 +1258,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         }         
     }
     
-    private void do_deleteDataSet_inDB() {        
+    private int do_deleteDataSet_inDB() {        
         try
         {
             MY_DBCM.setConnection_CLOSED("jdbc:sqlserver://HV-ABAS-SQL;databaseName=DiafBDE;integratedSecurity=true", "DISCONNECT");
@@ -1253,7 +1267,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             {   
             myConnection = MY_DBCM.getConnection();
             Statement myStatement = myConnection.createStatement();
-            myStatement.executeUpdate("DELETE FROM DiafBDE.dbo.T_Artikel_Maschine_Schicht WHERE pKey_KP = '" + jTextField_key.getText().trim() + "'");             
+            statementResult = myStatement.executeUpdate("DELETE FROM DiafBDE.dbo.T_Artikel_Maschine_Schicht WHERE pKey_KP = '" + jTextField_key.getText().trim() + "'");             
             }   
         }
         catch (/*ClassNotFoundException |*/ SQLException myException )
@@ -1266,7 +1280,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 }
             } catch (SQLException myException) {
             }
-        }         
+        }
+        return statementResult;          
     }
     
     private boolean test_isDataSetInDB(String aString) {
@@ -1276,6 +1291,15 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 myAnswer = true;           
         }
         return myAnswer;
+    }
+    private void set_tableEnabled(boolean aBoolean) {
+        jTextField_searchValue.setEnabled(aBoolean);
+        btn_deleteSearchValue.setEnabled(aBoolean);
+        btn_getCurrentDBData.setEnabled(aBoolean);
+        jTable_dbData.setEnabled(aBoolean);
+        for (int i = 0; i < TableColumns; i ++) {
+            mySorter.setSortable(i, aBoolean);
+        }
     }
     /**
      * @param args the command line arguments
@@ -1313,9 +1337,9 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_accept;
     private javax.swing.JButton btn_cancel;
-    private javax.swing.JButton btn_clearSearchValue;
     private javax.swing.JButton btn_close;
     private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_deleteSearchValue;
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_getCurrentDBData;
     private javax.swing.JButton btn_new;
