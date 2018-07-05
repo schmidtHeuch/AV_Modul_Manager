@@ -19,7 +19,11 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
     public AV_MM_MainFrame() {
         initComponents();
     }
-
+    ConverterFrame converterFrame;
+    ArticleOverviewFrame articleOverviewFrame;
+    String pathExcelGreenMaps = "U:\\Ablage\\kunsttech\\Arbeitsvorbereitung\\04_Stammdaten\\";        
+    String pathPDFVerpackungsvorschrift = "W:\\diaf003bilder\\Verpackungsvorschrift2\\";       
+    String pathPDFPruefprotokoll = "W:\\diaf003bilder\\Prüfprotokoll\\";
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,7 +58,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
 
         btn_openModul_Verpackungsvorschrift.setText("Verpackungsvorschrift");
         btn_openModul_Verpackungsvorschrift.setToolTipText("Öffnet das Modul zum Umwandeln von Excel-Dateien -> PDF.");
-        btn_openModul_Verpackungsvorschrift.setPreferredSize(new java.awt.Dimension(200, 23));
+        btn_openModul_Verpackungsvorschrift.setPreferredSize(new java.awt.Dimension(200, 36));
         btn_openModul_Verpackungsvorschrift.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_openModul_VerpackungsvorschriftActionPerformed(evt);
@@ -62,7 +66,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         });
 
         btn_openModul_Pruefprotokoll.setText("Prüfprotokoll");
-        btn_openModul_Pruefprotokoll.setPreferredSize(new java.awt.Dimension(200, 23));
+        btn_openModul_Pruefprotokoll.setPreferredSize(new java.awt.Dimension(200, 36));
         btn_openModul_Pruefprotokoll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_openModul_PruefprotokollActionPerformed(evt);
@@ -103,7 +107,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         jLabel1.setText("Modul: Übersicht Artikel-Maschine-Schicht");
 
         btn_openModul_Uebersicht_ArtikelMaschineSchicht.setText("Übersicht: Artikel-Maschine-Schicht");
-        btn_openModul_Uebersicht_ArtikelMaschineSchicht.setPreferredSize(new java.awt.Dimension(200, 23));
+        btn_openModul_Uebersicht_ArtikelMaschineSchicht.setPreferredSize(new java.awt.Dimension(200, 36));
         btn_openModul_Uebersicht_ArtikelMaschineSchicht.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_openModul_Uebersicht_ArtikelMaschineSchichtActionPerformed(evt);
@@ -154,16 +158,16 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         jPanel_modulesLayout.setVerticalGroup(
             jPanel_modulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_modulesLayout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addComponent(jPanel_modul_artikelMaschineSchicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addGap(199, 199, 199)
+                .addComponent(jPanel_modul_artikelMaschineSchicht, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(302, Short.MAX_VALUE))
             .addGroup(jPanel_modulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_modulesLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(ToolBar_MainFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
-                    .addComponent(panel_modulConverter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(426, Short.MAX_VALUE)))
+                    .addComponent(panel_modulConverter, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(400, Short.MAX_VALUE)))
         );
 
         btn_close.setText("Schließen");
@@ -195,13 +199,13 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel_modules, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_modules, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel_modules, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -210,15 +214,12 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
       
     private void btn_openModul_VerpackungsvorschriftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openModul_VerpackungsvorschriftActionPerformed
-        // TODO add your handling code here:
-        
-        String pathExcelGreenMaps = "U:\\Ablage\\kunsttech\\Arbeitsvorbereitung\\04_Stammdaten\\";        
-        String pathPDFVerpackungsvorschrift = "W:\\diaf003bilder\\Verpackungsvorschrift2\\";
-        
-        ConverterFrame converterFrame = new ConverterFrame(pathExcelGreenMaps, pathPDFVerpackungsvorschrift, "VP", "av"); //Grüne Mappe -> "Verpackungsvorschrift"
-        converterFrame.setTitle("Datei-Konverter");
-//        converterFrame.setSize(1024,900); 
-        converterFrame.setVisible(true);  
+        // TODO add your handling code here:    
+            converterFrame = new ConverterFrame(pathExcelGreenMaps, pathPDFVerpackungsvorschrift, "VP", "av"); //Grüne Mappe -> "Verpackungsvorschrift"
+            converterFrame.setTitle("Datei-Konverter");
+            converterFrame.setSize(927, Toolkit.getDefaultToolkit().getScreenSize().height - 30);
+            converterFrame.setLocation(345, 0);
+            converterFrame.setVisible(true);        
     }//GEN-LAST:event_btn_openModul_VerpackungsvorschriftActionPerformed
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
@@ -227,24 +228,27 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void btn_openModul_PruefprotokollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openModul_PruefprotokollActionPerformed
-        // TODO add your handling code here:
-        
-        String pathExcelGreenMaps = "U:\\Ablage\\kunsttech\\Arbeitsvorbereitung\\04_Stammdaten\\";        
-        String pathPDFPruefprotokoll = "W:\\diaf003bilder\\Prüfprotokoll\\";
-        
-        ConverterFrame converterFrame = new ConverterFrame(pathExcelGreenMaps, pathPDFPruefprotokoll, "Prüf neu", "av"); //Grüne Mappe -> "Prüfprotokoll"
-        converterFrame.setTitle("Datei-Konverter");
-//        converterFrame.setSize(1024,900); 
-        converterFrame.setVisible(true);  
+        // TODO add your handling code here: 
+            converterFrame = new ConverterFrame(pathExcelGreenMaps, pathPDFPruefprotokoll, "Prüf neu", "av"); //Grüne Mappe -> "Verpackungsvorschrift"
+            converterFrame.setTitle("Datei-Konverter");
+            converterFrame.setSize(927, Toolkit.getDefaultToolkit().getScreenSize().height - 30);
+            converterFrame.setLocation(345, 0);
+            converterFrame.setVisible(true);           
     }//GEN-LAST:event_btn_openModul_PruefprotokollActionPerformed
 
     private void btn_openModul_Uebersicht_ArtikelMaschineSchichtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openModul_Uebersicht_ArtikelMaschineSchichtActionPerformed
-        // TODO add your handling code here:
-        ArticleOverviewFrame articleOverviewFrame = new ArticleOverviewFrame();
-        articleOverviewFrame.setTitle("Übersicht: Artikel-Maschine-Schicht");
-        articleOverviewFrame.setSize(1265, Toolkit.getDefaultToolkit().getScreenSize().height - 30);
-        articleOverviewFrame.setLocation(345, 0);
-        articleOverviewFrame.setVisible(true);
+        // TODO add your handling code here:    
+        if (articleOverviewFrame != null && articleOverviewFrame.getInstance() >= 1) {
+            articleOverviewFrame.setAlwaysOnTop(true);
+            articleOverviewFrame.setAlwaysOnTop(false);
+        }
+        else {
+            articleOverviewFrame = new ArticleOverviewFrame();
+            articleOverviewFrame.setTitle("Übersicht: Artikel-Maschine-Schicht");
+            articleOverviewFrame.setSize(1265, Toolkit.getDefaultToolkit().getScreenSize().height - 30);
+            articleOverviewFrame.setLocation(345, 0);
+            articleOverviewFrame.setVisible(true);
+        }
     }//GEN-LAST:event_btn_openModul_Uebersicht_ArtikelMaschineSchichtActionPerformed
  
     /**

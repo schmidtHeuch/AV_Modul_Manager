@@ -30,12 +30,12 @@ import com.itextpdf.kernel.pdf.*;
  *
  * @author schmidtu
  */
-public class ConverterFrame extends javax.swing.JFrame {       
-  
+public class ConverterFrame extends javax.swing.JFrame {
     String Path_Source;
     String Path_Destination;
     String SignForTestSheetName;   
     String DocumentPassword;
+    DefaultTableModel myTableModel;
     
     /** Creates new form ConverterFrame
      * @param aSourcePath
@@ -80,9 +80,9 @@ public class ConverterFrame extends javax.swing.JFrame {
             }
         });
 
-        lbl_listCount_source.setText("123");
+        lbl_listCount_source.setPreferredSize(new java.awt.Dimension(100, 14));
 
-        lbl_listCount_destination.setText("123");
+        lbl_listCount_destination.setPreferredSize(new java.awt.Dimension(100, 14));
 
         table_sourceFiles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,7 +100,12 @@ public class ConverterFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        table_sourceFiles.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane3.setViewportView(table_sourceFiles);
+        if (table_sourceFiles.getColumnModel().getColumnCount() > 0) {
+            table_sourceFiles.getColumnModel().getColumn(0).setPreferredWidth(150);
+            table_sourceFiles.getColumnModel().getColumn(1).setPreferredWidth(200);
+        }
 
         table_destinationFiles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,7 +123,12 @@ public class ConverterFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        table_destinationFiles.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane4.setViewportView(table_destinationFiles);
+        if (table_destinationFiles.getColumnModel().getColumnCount() > 0) {
+            table_destinationFiles.getColumnModel().getColumn(0).setPreferredWidth(150);
+            table_destinationFiles.getColumnModel().getColumn(1).setPreferredWidth(200);
+        }
 
         javax.swing.GroupLayout jPanel_mainLayout = new javax.swing.GroupLayout(jPanel_main);
         jPanel_main.setLayout(jPanel_mainLayout);
@@ -129,10 +139,10 @@ public class ConverterFrame extends javax.swing.JFrame {
                 .addGroup(jPanel_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jTextField_sourcePath, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
-                    .addComponent(lbl_listCount_source))
+                    .addComponent(lbl_listCount_source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_listCount_destination)
+                    .addComponent(lbl_listCount_destination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_mainLayout.createSequentialGroup()
                         .addComponent(btn_convertToPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -150,8 +160,8 @@ public class ConverterFrame extends javax.swing.JFrame {
                     .addComponent(jTextField_destinationPath))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_listCount_destination)
-                    .addComponent(lbl_listCount_source))
+                    .addComponent(lbl_listCount_destination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_listCount_source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_mainLayout.createSequentialGroup()
@@ -161,7 +171,7 @@ public class ConverterFrame extends javax.swing.JFrame {
                         .addGroup(jPanel_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 11, Short.MAX_VALUE))))
         );
 
         btn_close.setText("Schließen");
@@ -192,40 +202,34 @@ public class ConverterFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_main, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel_main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel_main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void do_preBuild(String aSourcePath, String aDestinationPath, String aSign, String aPassword) {        
-        
+    private void do_preBuild(String aSourcePath, String aDestinationPath, String aSign, String aPassword) {
         Path_Source = aSourcePath;
         Path_Destination = aDestinationPath;
         SignForTestSheetName = aSign;
         DocumentPassword = aPassword;
     }
-    private void do_postBuild(String aSourcePath, String aDestinationPath) {        
-        
+    private void do_postBuild(String aSourcePath, String aDestinationPath) {
         jTextField_sourcePath.setBorder(BorderFactory.createTitledBorder("Quell-Verzeichnis"));
         jTextField_sourcePath.setEditable(false);
-        jTextField_sourcePath.setText(aSourcePath);
+        jTextField_sourcePath.setText(aSourcePath.substring(0, aSourcePath.length() - 1));
         
         jTextField_destinationPath.setBorder(BorderFactory.createTitledBorder("Ziel-Verzeichnis"));
         jTextField_destinationPath.setEditable(false);
-        jTextField_destinationPath.setText(aDestinationPath);
+        jTextField_destinationPath.setText(aDestinationPath.substring(0, aDestinationPath.length() - 1));
         
         this.do_fillTableWithSourceFiles();
         this.do_fillTableWithDestinationFiles();
@@ -234,7 +238,7 @@ public class ConverterFrame extends javax.swing.JFrame {
     private void do_fillTableWithSourceFiles()
     {        
         SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy   HH:mm:ss");
-        DefaultTableModel myTableModel = (DefaultTableModel) table_sourceFiles.getModel();
+        myTableModel = (DefaultTableModel) table_sourceFiles.getModel();
         Date myModifiedDate;
         File f = new File(Path_Source);
         File [] myFileList;
@@ -260,7 +264,7 @@ public class ConverterFrame extends javax.swing.JFrame {
     
     private void do_fillTableWithDestinationFiles()
     {  
-        DefaultTableModel myTableModel = (DefaultTableModel) table_destinationFiles.getModel();
+        myTableModel = (DefaultTableModel) table_destinationFiles.getModel();
         File f = new File(Path_Destination);
         File [] myFileList;
         myFileList = f.listFiles();
@@ -283,12 +287,12 @@ public class ConverterFrame extends javax.swing.JFrame {
         Object myRowObject;
         Workbook workbook;                  
         FileOutputStream myOutputStream;
-        DefaultTableModel tableModel = (DefaultTableModel) table_sourceFiles.getModel();
+        myTableModel = (DefaultTableModel) table_sourceFiles.getModel();
         int myRowCount = table_sourceFiles.getRowCount();
         System.out.println("Beginn: " + new Date());
         for (int myRowIndex = 0; myRowIndex < myRowCount; myRowIndex++)
         {
-            myRowObject = tableModel.getValueAt(myRowIndex, 0);
+            myRowObject = myTableModel.getValueAt(myRowIndex, 0);
             String myRowValue = myRowObject.toString();
             if (myRowValue.endsWith(".xls") || myRowValue.endsWith(".xlsx"))
             {
@@ -305,9 +309,7 @@ public class ConverterFrame extends javax.swing.JFrame {
 //                            if (!workbook.getSheetName(sheetIndex).toUpperCase().startsWith(SignForTestSheetName))
                         {
                             workbook.removeSheetAt(sheetIndex);
-                        }
-                          
-                        
+                        } 
 //                        myDataSet.substring(0, myDataSet.indexOf("."));
                     }
                     if (workbook.getNumberOfSheets() > 0) {
@@ -345,7 +347,7 @@ public class ConverterFrame extends javax.swing.JFrame {
                 }
             } 
         }        
-        lbl_listCount_destination.setText(String.valueOf(tableModel.getRowCount()));
+        lbl_listCount_destination.setText(String.valueOf(myTableModel.getRowCount()));
         System.out.println("Ende: " + new Date());
     }//GEN-LAST:event_btn_convertToPDFActionPerformed
 
