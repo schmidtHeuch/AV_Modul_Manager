@@ -114,6 +114,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel_base = new javax.swing.JPanel();
         jPanel_table = new javax.swing.JPanel();
         jScrollPane_table = new javax.swing.JScrollPane();
         jTable_dbData = new javax.swing.JTable();
@@ -157,6 +158,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         btn_close = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 255, 255));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -166,6 +168,9 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             }
         });
 
+        jPanel_base.setBackground(new java.awt.Color(153, 255, 255));
+
+        jPanel_table.setOpaque(false);
         jPanel_table.setPreferredSize(new java.awt.Dimension(1080, 498));
 
         jTable_dbData.setModel(new javax.swing.table.DefaultTableModel(
@@ -248,8 +253,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_tableLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel_tableLayout.createSequentialGroup()
+                .addGroup(jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tableLayout.createSequentialGroup()
                         .addComponent(jTextField_searchValue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_deleteSearchValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,14 +263,13 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                         .addGap(99, 99, 99)
                         .addComponent(lbl_rowCount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(jPanel_tableLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tableLayout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
                         .addComponent(lbl_searchValue)
-                        .addGap(623, 623, 623))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tableLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane_table, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
-                .addContainerGap())
+                        .addGap(623, 623, 623))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_tableLayout.createSequentialGroup()
+                        .addComponent(jScrollPane_table)
+                        .addContainerGap())))
         );
         jPanel_tableLayout.setVerticalGroup(
             jPanel_tableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,6 +287,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane_table)
                 .addContainerGap())
         );
+
+        jPanel_editData.setOpaque(false);
 
         lbl_KPArtikelNummer.setText("KP Artikel-Nr.");
         lbl_KPArtikelNummer.setEnabled(false);
@@ -302,50 +308,62 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
 
         jCheckBox_M1.setText("<html>M 1 &nbsp &nbsp &nbsp Reinraum -> KEIN PS!!! -> STAL</html>");
         jCheckBox_M1.setEnabled(false);
+        jCheckBox_M1.setOpaque(false);
         jCheckBox_M1.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M2.setText("<html>M 2 &nbsp &nbsp &nbsp STAL</html>");
         jCheckBox_M2.setEnabled(false);
+        jCheckBox_M2.setOpaque(false);
         jCheckBox_M2.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M3.setText("<html>M 3 &nbsp &nbsp &nbsp Bandstahl, Schnittheizung</html>");
         jCheckBox_M3.setEnabled(false);
+        jCheckBox_M3.setOpaque(false);
         jCheckBox_M3.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M4.setText("<html>M 4 &nbsp &nbsp &nbsp nicht verfügbar</html>");
         jCheckBox_M4.setEnabled(false);
+        jCheckBox_M4.setOpaque(false);
         jCheckBox_M4.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M5.setText("<html>M 5 &nbsp &nbsp &nbsp Bandstahl, Folie max. 2 mm, Lochwerkzeug, Brennstation, Schnittheizung, lange Kette</html>");
         jCheckBox_M5.setEnabled(false);
+        jCheckBox_M5.setOpaque(false);
         jCheckBox_M5.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M6.setText("<html>M 6 &nbsp &nbsp &nbsp Bandstahl + STAL, Wechselstaplung, Schnittheizung</html>");
         jCheckBox_M6.setEnabled(false);
+        jCheckBox_M6.setOpaque(false);
         jCheckBox_M6.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M7.setText("<html>M 7 &nbsp &nbsp &nbsp Bandstahl, Wechselstaplung, Schnittheizung</html>");
         jCheckBox_M7.setEnabled(false);
+        jCheckBox_M7.setOpaque(false);
         jCheckBox_M7.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M8.setText("<html>M 8 &nbsp &nbsp &nbsp Bandstahl, Wechselstaplung, Schnittheizung</html>");
         jCheckBox_M8.setEnabled(false);
+        jCheckBox_M8.setOpaque(false);
         jCheckBox_M8.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M9.setText("<html>M 9 &nbsp &nbsp &nbsp Reinraum -> KEIN PS!!! -> Bandstahl, Wechselstaplung, Schnittheizung</html>");
         jCheckBox_M9.setEnabled(false);
+        jCheckBox_M9.setOpaque(false);
         jCheckBox_M9.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M10.setText("<html>M 10 &nbsp &nbsp Bandstahl, Wechselstaplung, Schnittheizung, Handling</html>");
         jCheckBox_M10.setEnabled(false);
+        jCheckBox_M10.setOpaque(false);
         jCheckBox_M10.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M11.setText("<html>M 11 &nbsp &nbsp Bandstahl, Schnittheizung</html>");
         jCheckBox_M11.setEnabled(false);
+        jCheckBox_M11.setOpaque(false);
         jCheckBox_M11.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jCheckBox_M12.setText("<html>M 12 &nbsp &nbsp STAL, Schnittheizung</html>");
         jCheckBox_M12.setEnabled(false);
+        jCheckBox_M12.setOpaque(false);
         jCheckBox_M12.setPreferredSize(new java.awt.Dimension(550, 24));
 
         jTextArea_Bemerkungen.setColumns(20);
@@ -405,18 +423,21 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
         jTextField_Anlagedatum.setBorder(null);
         jTextField_Anlagedatum.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextField_Anlagedatum.setEnabled(false);
+        jTextField_Anlagedatum.setOpaque(false);
         jTextField_Anlagedatum.setPreferredSize(new java.awt.Dimension(204, 20));
 
         jTextField_Änderungsdatum.setEditable(false);
         jTextField_Änderungsdatum.setBorder(null);
         jTextField_Änderungsdatum.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextField_Änderungsdatum.setEnabled(false);
+        jTextField_Änderungsdatum.setOpaque(false);
         jTextField_Änderungsdatum.setPreferredSize(new java.awt.Dimension(204, 20));
 
         jTextField_Benutzer.setEditable(false);
         jTextField_Benutzer.setBorder(null);
         jTextField_Benutzer.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextField_Benutzer.setEnabled(false);
+        jTextField_Benutzer.setOpaque(false);
         jTextField_Benutzer.setPreferredSize(new java.awt.Dimension(204, 20));
 
         javax.swing.GroupLayout jPanel_editDataLayout = new javax.swing.GroupLayout(jPanel_editData);
@@ -472,7 +493,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                             .addComponent(jTextField_Anlagedatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField_Benutzer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField_Änderungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel_editDataLayout.setVerticalGroup(
             jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -536,8 +557,10 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 .addGroup(jPanel_editDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_accept)
                     .addComponent(btn_cancel))
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
+
+        jPanel_footer.setOpaque(false);
 
         btn_close.setText("Schließen");
         btn_close.addActionListener(new java.awt.event.ActionListener() {
@@ -553,7 +576,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
             .addGroup(jPanel_footerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_close)
-                .addContainerGap(1174, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_footerLayout.setVerticalGroup(
             jPanel_footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -563,29 +586,35 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout jPanel_baseLayout = new javax.swing.GroupLayout(jPanel_base);
+        jPanel_base.setLayout(jPanel_baseLayout);
+        jPanel_baseLayout.setHorizontalGroup(
+            jPanel_baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_baseLayout.createSequentialGroup()
+                .addComponent(jPanel_table, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel_editData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel_baseLayout.setVerticalGroup(
+            jPanel_baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_baseLayout.createSequentialGroup()
+                .addGroup(jPanel_baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel_table, javax.swing.GroupLayout.DEFAULT_SIZE, 956, Short.MAX_VALUE)
+                    .addComponent(jPanel_editData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel_table, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jPanel_editData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+            .addComponent(jPanel_base, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel_table, javax.swing.GroupLayout.DEFAULT_SIZE, 934, Short.MAX_VALUE)
-                    .addComponent(jPanel_editData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel_base, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -1275,7 +1304,8 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     
     private boolean test_isDataSetInDB(String aString) {
         boolean myAnswer = false;
-        for (int myRow = 0; myRow < jTable_dbData.getRowCount(); ++myRow ) {
+        for (int i = 0; i < jTable_dbData.getRowCount(); ++i ) {
+            int myRow = jTable_dbData.convertRowIndexToModel(i);
             if (myTableModel.getValueAt(myRow, 0).toString().trim().equals(aString))
                 myAnswer = true;           
         }
@@ -1344,6 +1374,7 @@ public class ArticleOverviewFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox_M7;
     private javax.swing.JCheckBox jCheckBox_M8;
     private javax.swing.JCheckBox jCheckBox_M9;
+    private javax.swing.JPanel jPanel_base;
     private javax.swing.JPanel jPanel_editData;
     private javax.swing.JPanel jPanel_footer;
     private javax.swing.JPanel jPanel_table;
