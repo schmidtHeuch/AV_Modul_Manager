@@ -33,8 +33,8 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel_base = new javax.swing.JPanel();
         jPanel_modules = new javax.swing.JPanel();
-        ToolBar_MainFrame = new javax.swing.JToolBar();
         panel_modulConverter = new javax.swing.JPanel();
         lbl_info_ModulConverter = new javax.swing.JLabel();
         btn_openModul_Verpackungsvorschrift = new javax.swing.JButton();
@@ -44,14 +44,18 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         btn_openModul_Uebersicht_ArtikelMaschineSchicht = new javax.swing.JButton();
         jPanel_footer = new javax.swing.JPanel();
         btn_close = new javax.swing.JButton();
+        ToolBar_MainFrame = new javax.swing.JToolBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 255, 255));
         setBounds(new java.awt.Rectangle(20, 20, 0, 0));
 
-        ToolBar_MainFrame.setRollover(true);
-        ToolBar_MainFrame.setPreferredSize(new java.awt.Dimension(13, 25));
+        jPanel_base.setBackground(new java.awt.Color(153, 255, 255));
+
+        jPanel_modules.setOpaque(false);
 
         panel_modulConverter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panel_modulConverter.setOpaque(false);
         panel_modulConverter.setPreferredSize(new java.awt.Dimension(300, 113));
 
         lbl_info_ModulConverter.setText("Modul: Konverter Excel -> PDF");
@@ -83,7 +87,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
                     .addGroup(panel_modulConverterLayout.createSequentialGroup()
                         .addComponent(lbl_info_ModulConverter)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btn_openModul_Pruefprotokoll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                    .addComponent(btn_openModul_Pruefprotokoll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
                     .addComponent(btn_openModul_Verpackungsvorschrift, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -102,6 +106,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
         panel_modulConverterLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn_openModul_Pruefprotokoll, btn_openModul_Verpackungsvorschrift});
 
         jPanel_modul_artikelMaschineSchicht.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel_modul_artikelMaschineSchicht.setOpaque(false);
         jPanel_modul_artikelMaschineSchicht.setPreferredSize(new java.awt.Dimension(300, 79));
 
         jLabel1.setText("Modul: Übersicht Artikel-Maschine-Schicht");
@@ -124,7 +129,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel_modul_artikelMaschineSchichtLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btn_openModul_Uebersicht_ArtikelMaschineSchicht, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                    .addComponent(btn_openModul_Uebersicht_ArtikelMaschineSchicht, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel_modul_artikelMaschineSchichtLayout.setVerticalGroup(
@@ -143,16 +148,12 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
             jPanel_modulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_modulesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_modul_artikelMaschineSchicht, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel_modul_artikelMaschineSchicht, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel_modulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_modulesLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(jPanel_modulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ToolBar_MainFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel_modulesLayout.createSequentialGroup()
-                            .addComponent(panel_modulConverter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(panel_modulConverter, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel_modulesLayout.setVerticalGroup(
@@ -160,17 +161,19 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel_modulesLayout.createSequentialGroup()
                 .addGap(199, 199, 199)
                 .addComponent(jPanel_modul_artikelMaschineSchicht, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
             .addGroup(jPanel_modulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_modulesLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(ToolBar_MainFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
+                    .addGap(54, 54, 54)
                     .addComponent(panel_modulConverter, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(400, Short.MAX_VALUE)))
+                    .addContainerGap(259, Short.MAX_VALUE)))
         );
 
-        btn_close.setText("Schließen");
+        jPanel_footer.setOpaque(false);
+
+        btn_close.setBackground(new java.awt.Color(255, 51, 51));
+        btn_close.setForeground(new java.awt.Color(255, 255, 255));
+        btn_close.setText("Programm beenden");
         btn_close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_closeActionPerformed(evt);
@@ -183,31 +186,57 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
             jPanel_footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_footerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_close)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel_footerLayout.setVerticalGroup(
             jPanel_footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_footerLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_close)
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+        );
+
+        ToolBar_MainFrame.setRollover(true);
+        ToolBar_MainFrame.setPreferredSize(new java.awt.Dimension(13, 25));
+
+        javax.swing.GroupLayout jPanel_baseLayout = new javax.swing.GroupLayout(jPanel_base);
+        jPanel_base.setLayout(jPanel_baseLayout);
+        jPanel_baseLayout.setHorizontalGroup(
+            jPanel_baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ToolBar_MainFrame, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel_baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel_modules, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel_baseLayout.setVerticalGroup(
+            jPanel_baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_baseLayout.createSequentialGroup()
+                .addComponent(ToolBar_MainFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 437, Short.MAX_VALUE)
+                .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel_baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_baseLayout.createSequentialGroup()
+                    .addGap(27, 27, 27)
+                    .addComponent(jPanel_modules, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(47, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_modules, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel_footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jPanel_base, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel_modules, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel_footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel_base, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -224,7 +253,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
         // TODO add your handling code here:
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void btn_openModul_PruefprotokollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openModul_PruefprotokollActionPerformed
@@ -287,6 +316,7 @@ public class AV_MM_MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_openModul_Uebersicht_ArtikelMaschineSchicht;
     private javax.swing.JButton btn_openModul_Verpackungsvorschrift;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel_base;
     private javax.swing.JPanel jPanel_footer;
     private javax.swing.JPanel jPanel_modul_artikelMaschineSchicht;
     private javax.swing.JPanel jPanel_modules;
